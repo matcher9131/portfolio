@@ -1,0 +1,11 @@
+{
+    "deno.enable": false,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "css.lint.unknownAtRules": "ignore",
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "html.format.indentInnerHtml": true,
+    "html.format.extraLiners": ""
+}
