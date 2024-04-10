@@ -11,7 +11,7 @@ const CodeItemsBefore = (): JSX.Element => {
     // prettier-ignore
     return (
         <CodeBlock>
-            Items = <CodeProperty>SelectedDirectory</CodeProperty>{`\n`}
+            <CodeProperty>Items</CodeProperty> = <CodeProperty>SelectedDirectory</CodeProperty>{`\n`}
             <CodeIndent level={1} />.<CodeFunction>SelectMany</CodeFunction>(<CodeParameter>directory</CodeParameter>{` => ディレクトリ内の画像ファイルを列挙`}){`\n`}
             <CodeIndent level={1} />.<CodeFunction>ToReadOnlyReactiveCollection</CodeFunction>(<CodeProperty>SelectedDirectory</CodeProperty>)
         </CodeBlock>
@@ -22,7 +22,7 @@ const CodeItemAfter = (): JSX.Element => {
     // prettier-ignore
     return (
         <CodeBlock>
-            Items = <CodeProperty>SelectedDirectory</CodeProperty>{`\n`}
+            <CodeProperty>Items</CodeProperty> = <CodeProperty>SelectedDirectory</CodeProperty>{`\n`}
             <CodeIndent level={1} />.<CodeFunction>Do</CodeFunction>(<CodeParameter>_</CodeParameter>{` => `}<CodeProperty>ClearSubject</CodeProperty>.<CodeFunction>OnNext</CodeFunction>(<CodeType>Unit</CodeType>.<CodeProperty>Default</CodeProperty>)){`\n`}
             <CodeIndent level={1} />.<CodeFunction>SelectMany</CodeFunction>(<CodeParameter>directory</CodeParameter>{` => ディレクトリ内の画像ファイルを列挙`}){`\n`}
             <CodeIndent level={1} />.<CodeFunction>ToReadOnlyReactiveCollection</CodeFunction>(<CodeProperty>ClearSubject</CodeProperty>)
@@ -58,7 +58,7 @@ const Slide = (): JSX.Element => {
             <p>Windows 10 or 11</p>
 
             <h2>使用技術</h2>
-            <table>
+            <table className="table table-lg max-w-[400px]">
                 <thead>
                     <tr>
                         <th>種別</th>
