@@ -1,14 +1,38 @@
-const codeContent1 = `Items = SelectedDirectory
-    .SelectMany(directory => ディレクトリ内の画像ファイルを列挙)
-    .ToReadOnlyReactiveCollection(SelectedDirectory)`;
-const codeContent2 = `Items = SelectedDirectory
-    .Do(_ => ClearSubject.OnNext(Unit.Default))
-    .SelectMany(directory => ディレクトリ内の画像ファイルを列挙)
-    .ToReadOnlyReactiveCollection(ClearSubject)`;
+import CodeBlock from "@/app/components/code/codeBlock";
+import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
+import CodeParameter from "@/app/components/code/codeHighlight/codeParameter";
+import CodeProperty from "@/app/components/code/codeHighlight/codeProperty";
+import CodeType from "@/app/components/code/codeHighlight/codeType";
+import CodeIndent from "@/app/components/code/codeIndent";
+import CodeInline from "@/app/components/code/codeInline";
+import { classes } from "@/app/util/classes";
+
+const CodeItemsBefore = (): JSX.Element => {
+    // prettier-ignore
+    return (
+        <CodeBlock>
+            Items = <CodeProperty>SelectedDirectory</CodeProperty>{`\n`}
+            <CodeIndent level={1} />.<CodeFunction>SelectMany</CodeFunction>(<CodeParameter>directory</CodeParameter>{` => ディレクトリ内の画像ファイルを列挙`}){`\n`}
+            <CodeIndent level={1} />.<CodeFunction>ToReadOnlyReactiveCollection</CodeFunction>(<CodeProperty>SelectedDirectory</CodeProperty>)
+        </CodeBlock>
+    );
+};
+
+const CodeItemAfter = (): JSX.Element => {
+    // prettier-ignore
+    return (
+        <CodeBlock>
+            Items = <CodeProperty>SelectedDirectory</CodeProperty>{`\n`}
+            <CodeIndent level={1} />.<CodeFunction>Do</CodeFunction>(<CodeParameter>_</CodeParameter>{` => `}<CodeProperty>ClearSubject</CodeProperty>.<CodeFunction>OnNext</CodeFunction>(<CodeType>Unit</CodeType>.<CodeProperty>Default</CodeProperty>)){`\n`}
+            <CodeIndent level={1} />.<CodeFunction>SelectMany</CodeFunction>(<CodeParameter>directory</CodeParameter>{` => ディレクトリ内の画像ファイルを列挙`}){`\n`}
+            <CodeIndent level={1} />.<CodeFunction>ToReadOnlyReactiveCollection</CodeFunction>(<CodeProperty>ClearSubject</CodeProperty>)
+        </CodeBlock>
+    );
+};
 
 const Slide = (): JSX.Element => {
     return (
-        <article>
+        <article className="mx-10 my-5">
             <h1>Slider</h1>
             <p>簡易エクスプローラー機能を搭載した画像ビューアー（Windows用デスクトップアプリ）</p>
 
@@ -78,7 +102,18 @@ const Slide = (): JSX.Element => {
             <p>
                 私のスキル的にWindows用デスクトップアプリを作る選択肢としてはWPF、Electron、Flutterの3つになる。それぞれのメリット・デメリットは
             </p>
-            <ul>
+            <ul
+                className={classes(
+                    "[&_li.pros]:list-none",
+                    "[&_li.pros]:-indent-4",
+                    "[&_li.pros]:before:content-['+']",
+                    "[&_li.pros]:before:mr-2",
+                    "[&_li.cons]:list-none",
+                    "[&_li.cons]:-indent-4",
+                    "[&_li.cons]:before:content-['-']",
+                    "[&_li.cons]:before:mr-2",
+                )}
+            >
                 <li>
                     C# + WPF
                     <ul>
@@ -97,7 +132,7 @@ const Slide = (): JSX.Element => {
                         <li className="cons">Electronにあまり慣れていない</li>
                         <li className="cons">React + Electronとなると情報が少なめ</li>
                         <li className="cons">
-                            <code>contextBridge</code>まわりが面倒くさい
+                            <CodeInline>contextBridge</CodeInline>まわりが面倒くさい
                         </li>
                         <li className="cons">
                             ローカルファイルを網羅するとなるとNode.jsを使うことになるが並列処理がC#に比べると難易度が高い
@@ -137,18 +172,18 @@ const Slide = (): JSX.Element => {
             <p>
                 ツリービューでディレクトリが選択されたときに、ファイルリストは「全アイテム消去」→「読み込んだファイルをすべて追加」という挙動をする。
                 <br />
-                ReactivePropertyではこれを宣言的に実装する必要があるため、バインドしているプロパティ（<code>Items</code>
+                ReactivePropertyではこれを宣言的に実装する必要があるため、バインドしているプロパティ（
+                <CodeInline>Items</CodeInline>
                 ）が「
-                <code>SelectedDirectory</code>
+                <CodeInline>SelectedDirectory</CodeInline>
                 （選択されているディレクトリ）から新しい値が流れてきたらそのディレクトリ内の全画像ファイルを読み込んでリストに追加する」ようにすればよいのだが、このままだと既にあるアイテムを消すことなく新たに追加してしまう。
                 <br />
-                幸い<code>ToReadOnlyReactiveCollection</code>メソッドは内容を全て消去するタイミングを指定する
-                <code>IObservable</code>を引数に取れるので、これに<code>SelectedDirectory</code>
+                幸い<CodeInline>ToReadOnlyReactiveCollection</CodeInline>
+                メソッドは内容を全て消去するタイミングを指定する
+                <CodeInline>IObservable</CodeInline>を引数に取れるので、これに<CodeInline>SelectedDirectory</CodeInline>
                 を与えることで「全アイテム消去」ができる。
             </p>
-            <pre>
-                <code>{codeContent1}</code>
-            </pre>
+            <CodeItemsBefore />
             <p>
                 これで解決と思いきや…
                 <br />
@@ -156,75 +191,75 @@ const Slide = (): JSX.Element => {
             </p>
             <ol>
                 <li>
-                    <code>SelectedDirectory</code>に新しい値がセットされる
+                    <CodeInline>SelectedDirectory</CodeInline>に新しい値がセットされる
                 </li>
                 <li>
-                    <code>Items</code>が空になる
+                    <CodeInline>Items</CodeInline>が空になる
                 </li>
                 <li>
-                    <code>Items</code>に1つ目のファイルが追加される
+                    <CodeInline>Items</CodeInline>に1つ目のファイルが追加される
                 </li>
                 <li>
-                    <code>Items</code>に2つ目のファイルが追加される
+                    <CodeInline>Items</CodeInline>に2つ目のファイルが追加される
                 </li>
                 <li>（以下略）</li>
             </ol>
             <p>しかし実際の処理順はおそらく以下のようで、1つ目のファイルのみが表示されないという現象に陥った。</p>
             <ol>
                 <li>
-                    <code>SelectedDirectory</code>に新しい値がセットされる
+                    <CodeInline>SelectedDirectory</CodeInline>に新しい値がセットされる
                 </li>
                 <li>
-                    <code>Items</code>に1つ目のファイルが追加される
+                    <CodeInline>Items</CodeInline>に1つ目のファイルが追加される
                 </li>
                 <li>
-                    <code>Items</code>が空になる
+                    <CodeInline>Items</CodeInline>が空になる
                 </li>
                 <li>
-                    <code>Items</code>に2つ目のファイルが追加される
+                    <CodeInline>Items</CodeInline>に2つ目のファイルが追加される
                 </li>
                 <li>（以下略）</li>
             </ol>
             <p>
-                ライブラリ内部の処理順をどうにかするのなんて無理だろ…と途方に暮れていたところ、<code>IObservable</code>
-                の拡張メソッドに<code>Do</code>というものがあることに気づく。
+                ライブラリ内部の処理順をどうにかするのなんて無理だろ…と途方に暮れていたところ、
+                <CodeInline>IObservable</CodeInline>
+                の拡張メソッドに<CodeInline>Do</CodeInline>というものがあることに気づく。
                 <br />
-                これは<code>IObservable</code>
+                これは<CodeInline>IObservable</CodeInline>
                 が新たな値を発行したときに予め設定したラムダ式を実行してくれるという優れもの。
             </p>
             <p>
-                かくして、新たに<code>Subject</code>を用意し、<code>Do</code>メソッドで値を発行するようにして、前述の
-                <code>ToReadOnlyReactiveCollection</code>
-                メソッドの引数にこの<code>Subject</code>を与えれば、
+                かくして、新たに<CodeInline>Subject</CodeInline>を用意し、<CodeInline>Do</CodeInline>
+                メソッドで値を発行するようにして、前述の
+                <CodeInline>ToReadOnlyReactiveCollection</CodeInline>
+                メソッドの引数にこの<CodeInline>Subject</CodeInline>を与えれば、
             </p>
-            <pre>
-                <code>{codeContent2}</code>
-            </pre>
+            <CodeItemAfter />
             <p>以下の想定通りの処理順になる。</p>
             <ol>
                 <li>
-                    <code>SelectedDirectory</code>に新しい値がセットされる
+                    <CodeInline>SelectedDirectory</CodeInline>に新しい値がセットされる
                 </li>
                 <li>
-                    <code>ClearSubject</code>が新しい値を発行する
+                    <CodeInline>ClearSubject</CodeInline>が新しい値を発行する
                 </li>
                 <li>
-                    <code>Items</code>が空になる
+                    <CodeInline>Items</CodeInline>が空になる
                 </li>
                 <li>
-                    <code>Items</code>に1つ目のファイルが追加される
+                    <CodeInline>Items</CodeInline>に1つ目のファイルが追加される
                 </li>
                 <li>
-                    <code>Items</code>に2つ目のファイルが追加される
+                    <CodeInline>Items</CodeInline>に2つ目のファイルが追加される
                 </li>
                 <li>（以下略）</li>
             </ol>
 
             <h3>読み込めないファイルへの対処</h3>
             <p>
-                C#標準ライブラリで画像を取り扱う方法は大きく分けて<code>System.Drawing</code>
+                C#標準ライブラリで画像を取り扱う方法は大きく分けて<CodeInline>System.Drawing</CodeInline>
                 名前空間のクラスを用いるもの（以下、方法A）と
-                <code>System.Windows.Media.Imaging</code>
+                <CodeInline>System.Windows.Media.Imaging</CodeInline>
                 名前空間のクラスを用いるもの（以下、方法B）の2つがあり、方法Aが昔ながらの比較的低いレイヤー、方法Bは新しく用意された比較的高いレイヤーのものである。
                 <br />
                 勿論方法Bで画像の読み込み処理をしていたのだが、「フォト」や「ペイント」などでは開けるのに方法Bだと例外を吐くファイルが存在することに気づく。
@@ -238,7 +273,7 @@ const Slide = (): JSX.Element => {
             <p>
                 エクスプローラーではファイル・ディレクトリを名前順にソートするときに自然順ソート（数字の部分のみ数値として比較、それ以外は辞書順で比較）が採用されているため、これを本アプリでも実現したい。
                 <br />
-                ありがたいことにWindows標準関数に自然順で比較する<code>StrCmpLogicalW</code>
+                ありがたいことにWindows標準関数に自然順で比較する<CodeInline>StrCmpLogicalW</CodeInline>
                 関数があるため、これを利用すれば実装できる。
             </p>
 
@@ -247,7 +282,7 @@ const Slide = (): JSX.Element => {
                 お気に入りレベルは自動的に保存される仕様にしたが、頻繁なディスクアクセスを避けるために、そのタイミングはアプリの終了時とした。
                 <br />
                 そのため本アプリを多重起動すると、一方で設定したお気に入りレベルがもう一方のお気に入りレベルで上書き保存される可能性がある。これを防ぐために
-                <code>Mutex</code>クラスにより多重起動を禁止した。
+                <CodeInline>Mutex</CodeInline>クラスにより多重起動を禁止した。
             </p>
         </article>
     );
