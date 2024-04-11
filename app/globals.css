@@ -25,3 +25,9 @@
         @apply leading-8;
     }
 }
+
+@layer components {
+    article.main-article {
+        @apply mx-10 my-5;
+    }
+}

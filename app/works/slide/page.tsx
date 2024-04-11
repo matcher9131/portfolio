@@ -32,7 +32,7 @@ const CodeItemAfter = (): JSX.Element => {
 
 const Slide = (): JSX.Element => {
     return (
-        <article className="mx-10 my-5">
+        <article className="main-article">
             <h1>Slider</h1>
             <p>簡易エクスプローラー機能を搭載した画像ビューアー（Windows用デスクトップアプリ）</p>
 
