@@ -12,6 +12,9 @@
     h3 {
         @apply mb-2 mt-5 text-xl font-bold;
     }
+    h4 {
+        @apply mb-1 mt-3 text-lg font-bold;
+    }
     p {
         @apply my-1 leading-8;
     }

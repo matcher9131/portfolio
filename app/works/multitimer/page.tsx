@@ -1,10 +1,18 @@
+import { Metadata } from "next";
 import CodeInline from "@/app/components/code/codeInline";
+import { siteTitle } from "@/app/page";
+
+export const description = "複数のアラーム付きタイマーを動かせられるWindowsデスクトップアプリ";
+
+export const metadata: Metadata = {
+    title: `MultiTimer - ${siteTitle}`,
+};
 
 const MultiTimer = (): JSX.Element => {
     return (
         <article className="main-article">
             <h1>MultiTimer</h1>
-            <p>複数のアラーム付きタイマーを動かせられるWindowsデスクトップアプリ</p>
+            <p>{description}</p>
 
             {/* ここにスクリーンショット */}
 
@@ -157,7 +165,6 @@ const MultiTimer = (): JSX.Element => {
 
             <h4>仕様を満たせない代替案</h4>
             <p>
-                <br />
                 そもそも<CodeInline>Observable.Interval</CodeInline>は停止後に再開ができないため却下。
                 <br />
                 次に<CodeInline>ReactiveTimer</CodeInline>
