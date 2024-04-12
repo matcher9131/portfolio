@@ -85,7 +85,7 @@ const MultiTimer = (): JSX.Element => {
             <p>
                 そもそも本アプリは1つのタイマーにつきいくつかの内部タイマーを使用している。初期の設計では以下の選択をした。
             </p>
-            <table>
+            <table className="table">
                 <thead>
                     <tr>
                         <th>目的</th>
@@ -146,8 +146,10 @@ const MultiTimer = (): JSX.Element => {
                 <br />
                 <CodeInline>Observable.Interval</CodeInline>メソッドおよび
                 <CodeInline>ReactiveTimer</CodeInline>クラスのコンストラクタはともに
-                <CodeInline>IScheduler</CodeInline>を引数に持つため<CodeInline>TestScheduler</CodeInline>
-                のインスタンスを渡せるのだが、<CodeInline>Stopwatch</CodeInline>
+                <CodeInline>IScheduler</CodeInline>を引数に持つため、テスト時には<CodeInline>TestScheduler</CodeInline>
+                のインスタンスを 、実行時にはデフォルトのスケジューラーである
+                <CodeInline>System.Reactive.Concurrency.Scheduler.Default</CodeInline>
+                を渡せばよい。しかし<CodeInline>Stopwatch</CodeInline>
                 クラスはそれができず、かつモックを用意しようにも一から作ることになる。
                 <br />
                 よって時間計測に<CodeInline>Stopwatch</CodeInline>クラスを用いることを断念し、代替案を探すのだが…
@@ -164,15 +166,25 @@ const MultiTimer = (): JSX.Element => {
                 具体的な例として、<CodeInline>ReactiveTimer</CodeInline>
                 で100ミリ秒間隔で新たな値を発行し、ViewModel側で新たな値を受け取るたびに残り時間を100ミリ秒減らすという実装にしたとする。この際、
                 <CodeInline>ReactiveTimer</CodeInline>
-                が最後に値を発行してから50ミリ秒のところでタイマーを一時停止した場合、再開してから50ミリ秒後に新たな値を流してくれないと経過時間がずれてしまう。
+                が最後に値を発行してから50ミリ秒のところでタイマーを一時停止した場合、再開してから50ミリ秒後に新たな値を流してくれないと経過時間がずれてしまう。しかし実際には再開と同時に新たな値が流れてしまうため、一時停止・再開をするたびに平均して50ミリ秒ずつ残り時間が実際より少なくなる。
                 <br />
-                すなわち、一時停止・再開をするたびに平均して50ミリ秒ずつ残り時間が実際より少なくなってしまう。当然これは意図する挙動ではない。
+                当然これは意図する挙動ではないので、<CodeInline>ReactiveTimer</CodeInline>も却下。
             </p>
 
-            <h4>
-                <CodeInline>IScheduler</CodeInline>から攻める
-            </h4>
-            <p>NOT IMPLEMENTED</p>
+            <h4>スケジューラーから攻める</h4>
+            <p>
+                ここで<CodeInline>IScheduler</CodeInline>のIntelliSenseが示す候補のなかに
+                <CodeInline>StartStopwatch</CodeInline>なるメソッドがあることに気づく。
+                <br />
+                まさにこれだ！と思ったのだが、メソッドの返り値である
+                <CodeInline>System.Reactive.Concurrency.IStopwatch</CodeInline>インタフェースは経過時間を示す
+                <CodeInline>Elapsed</CodeInline>プロパティがあるのみで、一時停止・再開は不可能である。
+                <br />
+                仕方ないので、一時停止中でも内部ではストップウォッチを回し続ける代わりに、一時停止・再開をしたときの経過時間を元に一時停止中の経過時間を計算することで対応した。
+                <br />
+                （なおこの方法ならスケジューラーやらタイマーやら使わなくても<CodeInline>DateTime</CodeInline>
+                で時刻を見るだけでもできてしまう…。まぁシステム時刻が使用中に変化しても大丈夫な方法ということで。）
+            </p>
         </article>
     );
 };
