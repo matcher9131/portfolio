@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import CodeInline from "@/app/components/code/codeInline";
 import { siteTitle } from "@/app/page";
 

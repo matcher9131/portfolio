@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import CodeBlock from "@/app/components/code/codeBlock";
 import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
 import CodeParameter from "@/app/components/code/codeHighlight/codeParameter";

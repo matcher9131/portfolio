@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import Link from "next/link";
 import { siteTitle } from "../page";
 import { description as multiTimerDescription } from "./multitimer/page";
