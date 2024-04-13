@@ -1,4 +1,6 @@
 import { type Metadata } from "next";
+import { name, description } from "./properties";
+import { siteTitle } from "@/app/_shared/const";
 import CodeBlock from "@/app/components/code/codeBlock";
 import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
 import CodeParameter from "@/app/components/code/codeHighlight/codeParameter";
@@ -6,7 +8,6 @@ import CodeProperty from "@/app/components/code/codeHighlight/codeProperty";
 import CodeType from "@/app/components/code/codeHighlight/codeType";
 import CodeIndent from "@/app/components/code/codeIndent";
 import CodeInline from "@/app/components/code/codeInline";
-import { siteTitle } from "@/app/page";
 import { classes } from "@/app/util/classes";
 
 const CodeItemsBefore = (): JSX.Element => {
@@ -32,8 +33,6 @@ const CodeItemAfter = (): JSX.Element => {
     );
 };
 
-export const description = "簡易エクスプローラー機能を搭載した画像ビューアー（Windows用デスクトップアプリ）";
-
 export const metadata: Metadata = {
     title: `Slide - ${siteTitle}`,
 };
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
 const Slide = (): JSX.Element => {
     return (
         <article className="main-article">
-            <h1>Slider</h1>
+            <h1>{name}</h1>
             <p>{description}</p>
 
             {/* ここにスクリーンショット */}

@@ -1,7 +1,6 @@
 import { type Metadata } from "next";
 import Link from "next/link";
-
-export const siteTitle = "matcher's portfolio";
+import { siteTitle } from "./_shared/const";
 
 export const metadata: Metadata = {
     title: siteTitle,

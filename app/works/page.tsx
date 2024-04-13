@@ -1,11 +1,10 @@
 import { type Metadata } from "next";
 import Link from "next/link";
-import { siteTitle } from "../page";
-import { description as multiTimerDescription } from "./multitimer/page";
-import { description as slideDescription } from "./slide/page";
+import { getWorks } from "../_shared/pageSummaries";
+import { siteTitle } from "@/app/_shared/const";
 
 export const metadata: Metadata = {
-    title: `Wokrs - ${siteTitle}`,
+    title: `Works - ${siteTitle}`,
 };
 
 const Works = (): JSX.Element => {
@@ -21,18 +20,16 @@ const Works = (): JSX.Element => {
 
             <h2>作品一覧</h2>
             <dl className="leading-8 [&_dd]:pl-4">
-                <dt>
-                    <Link href="/works/multitimer" className="link">
-                        MultiTimer
-                    </Link>
-                </dt>
-                <dd>{multiTimerDescription}</dd>
-                <dt>
-                    <Link href="/works/slide" className="link">
-                        Slide
-                    </Link>
-                </dt>
-                <dd>{slideDescription}</dd>
+                {getWorks().map((work) => (
+                    <>
+                        <dt>
+                            <Link href={work.path} className="link">
+                                {work.name}
+                            </Link>
+                        </dt>
+                        <dd>{work.description}</dd>
+                    </>
+                ))}
             </dl>
         </article>
     );

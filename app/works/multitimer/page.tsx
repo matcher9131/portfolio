@@ -1,8 +1,7 @@
 import { type Metadata } from "next";
+import { description, name } from "./properties";
+import { siteTitle } from "@/app/_shared/const";
 import CodeInline from "@/app/components/code/codeInline";
-import { siteTitle } from "@/app/page";
-
-export const description = "複数のアラーム付きタイマーを動かせられるWindowsデスクトップアプリ";
 
 export const metadata: Metadata = {
     title: `MultiTimer - ${siteTitle}`,
@@ -11,7 +10,7 @@ export const metadata: Metadata = {
 const MultiTimer = (): JSX.Element => {
     return (
         <article className="main-article">
-            <h1>MultiTimer</h1>
+            <h1>{name}</h1>
             <p>{description}</p>
 
             {/* ここにスクリーンショット */}
