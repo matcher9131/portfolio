@@ -3,14 +3,16 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+type RootLayoutProps = {
+    readonly children: React.ReactNode;
+};
+
+const RootLayout = ({ children }: RootLayoutProps): JSX.Element => {
     return (
         <html lang="ja" data-theme="night">
             <body className={inter.className}>{children}</body>
         </html>
     );
-}
+};
+
+export default RootLayout;
