@@ -1,2 +1,7 @@
-export const name = "MultiTimer";
-export const description = "複数のアラーム付きタイマーを動かせられるWindowsデスクトップアプリ";
+import { type PageProperty } from "@/app/_shared/pageProperties";
+
+export const pageProperties: PageProperty = {
+    path: "/works/multitimer",
+    name: "MultiTimer",
+    description: "複数のアラーム付きタイマーを動かせられるWindowsデスクトップアプリ",
+};

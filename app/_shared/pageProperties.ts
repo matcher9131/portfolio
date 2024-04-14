@@ -1,19 +1,24 @@
-type PageProperty = {
+import { pageProperties as multiTimerPageProperties } from "../works/multitimer/properties";
+import { pageProperties as worksPageProperties } from "../works/properties";
+import { pageProperties as slidePageProperties } from "../works/slide/properties";
+
+export type PageProperty = {
     readonly path: string;
     readonly name: string;
-    readonly description: string;
+    readonly description?: string;
 };
 
-// temporary
-export const getWorks = (): PageProperty[] => [
+const pageProperties: readonly PageProperty[] = [
     {
-        path: "/works/slide",
-        name: "Slide",
-        description: "簡易エクスプローラー機能を搭載した画像ビューアー（Windows用デスクトップアプリ）",
+        path: "/",
+        name: "Home",
     },
-    {
-        path: "/works/slide",
-        name: "MultiTimer",
-        description: "複数のアラーム付きタイマーを動かせられるWindowsデスクトップアプリ",
-    },
+    worksPageProperties,
+    multiTimerPageProperties,
+    slidePageProperties,
 ];
+
+export const getPageName = (path: string): string | null =>
+    pageProperties.find((page) => page.path === path)?.name ?? null;
+
+export const getWorksPages = (): PageProperty[] => pageProperties.filter((page) => /^\/works\/.+$/.test(page.path));
