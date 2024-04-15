@@ -1,7 +1,6 @@
 import { type Metadata } from "next";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
-import Breadcrumb from "@/app/components/breadcrumb";
 import CodeInline from "@/app/components/code/codeInline";
 
 export const metadata: Metadata = {
@@ -11,7 +10,6 @@ export const metadata: Metadata = {
 const MultiTimer = (): JSX.Element => {
     return (
         <>
-            <Breadcrumb path="/works/multitimer" />
             <article className="main-article">
                 <h1>{pageProperties.name}</h1>
                 <p>{pageProperties.description}</p>

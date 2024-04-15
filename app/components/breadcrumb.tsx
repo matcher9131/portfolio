@@ -1,11 +1,14 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { getPageName } from "../_shared/pageProperties";
 
-type BreadcrumbProps = {
-    readonly path: string;
-};
+const Breadcrumb = (): JSX.Element | null => {
+    const path = usePathname();
+    // rootにはBreadcrumbを表示しない
+    if (path === "/") return null;
 
-const Breadcrumb = ({ path }: BreadcrumbProps): JSX.Element => {
     const segments = path.split("/").filter((s) => s !== "");
     const paths = [
         "/",
@@ -18,7 +21,7 @@ const Breadcrumb = ({ path }: BreadcrumbProps): JSX.Element => {
     ];
 
     return (
-        <nav>
+        <nav className="breadcrumb">
             <ol className="ml-0 flex list-none flex-row">
                 {paths.map((element) => (
                     <li key={element} className="before:mx-3 before:content-['>'] first-of-type:before:content-['']">

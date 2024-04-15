@@ -1,7 +1,6 @@
 import { type Metadata } from "next";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
-import Breadcrumb from "@/app/components/breadcrumb";
 import CodeBlock from "@/app/components/code/codeBlock";
 import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
 import CodeParameter from "@/app/components/code/codeHighlight/codeParameter";
@@ -41,7 +40,6 @@ export const metadata: Metadata = {
 const Slide = (): JSX.Element => {
     return (
         <>
-            <Breadcrumb path="/works/slide" />
             <article className="main-article">
                 <h1>{pageProperties.name}</h1>
                 <p>{pageProperties.description}</p>
