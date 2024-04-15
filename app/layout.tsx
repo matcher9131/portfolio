@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import PageTransition from "./components/pageTransition";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,7 +11,10 @@ type RootLayoutProps = {
 const RootLayout = ({ children }: RootLayoutProps): JSX.Element => {
     return (
         <html lang="ja" data-theme="night">
-            <body className={inter.className}>{children}</body>
+            <body className={inter.className}>
+                <PageTransition />
+                {children}
+            </body>
         </html>
     );
 };
