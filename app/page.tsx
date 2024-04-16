@@ -1,6 +1,6 @@
 import { type Metadata } from "next";
-import Link from "next/link";
 import { siteTitle } from "./_shared/const";
+import { TransitionLink } from "./components/pageTransition/transitionLink";
 
 export const metadata: Metadata = {
     title: siteTitle,
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const Home = (): JSX.Element => {
     return (
         <main>
-            <Link href="/works">Works</Link>
+            <TransitionLink href="/works">Works</TransitionLink>
         </main>
     );
 };

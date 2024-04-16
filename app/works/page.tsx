@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
-import Link from "next/link";
 import { Fragment } from "react";
 import { getWorksPages } from "../_shared/pageProperties";
+import { TransitionLink } from "../components/pageTransition/transitionLink";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
 
@@ -26,9 +26,9 @@ const Works = (): JSX.Element => {
                     {getWorksPages().map((page) => (
                         <Fragment key={page.path}>
                             <dt>
-                                <Link href={page.path} className="link">
+                                <TransitionLink href={page.path} className="link">
                                     {page.name}
-                                </Link>
+                                </TransitionLink>
                             </dt>
                             <dd>{page.description}</dd>
                         </Fragment>

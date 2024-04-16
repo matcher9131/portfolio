@@ -1,8 +1,9 @@
 "use client";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { getPageName } from "../_shared/pageProperties";
+import { TransitionLink } from "./pageTransition/transitionLink";
 
 const Breadcrumb = (): JSX.Element | null => {
     const path = usePathname();
@@ -26,9 +27,9 @@ const Breadcrumb = (): JSX.Element | null => {
                 {paths.map((element) => (
                     <li key={element} className="before:mx-3 before:content-['>'] first-of-type:before:content-['']">
                         {element !== path ? (
-                            <Link href={element} className="link">
+                            <TransitionLink href={element} className="link">
                                 {getPageName(element) ?? element}
-                            </Link>
+                            </TransitionLink>
                         ) : (
                             <span>{getPageName(element) ?? element}</span>
                         )}
