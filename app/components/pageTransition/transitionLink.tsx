@@ -19,10 +19,10 @@ export const TransitionLink = ({ children, href, ...props }: TransitionLinkProps
         e.preventDefault();
         if (isAnimating) return;
 
+        await reset();
         setIsAnimating(true);
         await animate();
         router.push(href.toString());
-        reset();
         setIsAnimating(false);
     };
 
