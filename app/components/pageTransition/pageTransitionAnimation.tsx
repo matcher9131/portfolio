@@ -2,12 +2,13 @@
 
 import { forwardRef } from "react";
 import { useRecoilValue } from "recoil";
-import { backgroundRefsAtom, starRefsAtom } from "../../_models/pageTransitionAnimation/atoms";
+import { backgroundRefStates, isAnimatingState, starRefStates } from "./states";
+import { classes } from "@/app/util/classes";
 
 // eslint-disable-next-line react/display-name
 const Star = forwardRef<SVGSVGElement>((_, ref): JSX.Element => {
     return (
-        <svg ref={ref} viewBox="-100 -100 200 200" className="absolute -top-[10vw] h-[10vw] w-[10vw]">
+        <svg ref={ref} viewBox="-100 -100 200 200" className="absolute -top-[5vw] h-[5vw] w-[5vw] overflow-clip">
             <polygon
                 fill="yellow"
                 fillRule="nonzero"
@@ -19,22 +20,33 @@ const Star = forwardRef<SVGSVGElement>((_, ref): JSX.Element => {
 
 // eslint-disable-next-line react/display-name
 const Background = forwardRef<HTMLDivElement>((_, ref): JSX.Element => {
-    return <div ref={ref} className="absolute -top-[10vw] h-0 w-[10vw] bg-base-100"></div>;
+    return <div ref={ref} className="absolute -top-[5vw] h-0 w-[5vw] overflow-clip bg-base-100"></div>;
 });
 
 const PageTransitionAnimation = (): JSX.Element => {
-    const starRefs = useRecoilValue(starRefsAtom);
-    const backgroundRefs = useRecoilValue(backgroundRefsAtom);
+    const isAnimating = useRecoilValue(isAnimatingState);
+    const starRefs = useRecoilValue(starRefStates);
+    const backgroundRefs = useRecoilValue(backgroundRefStates);
 
     return (
-        <>
-            {starRefs.map((_, i) => (
-                <Star key={i} ref={starRefs[i]} />
-            ))}
+        <div
+            className={classes(
+                "fixed",
+                "h-full",
+                "w-full",
+                "z-10",
+                "overflow-hidden",
+                "bg-transparent",
+                isAnimating ? "block" : "hidden",
+            )}
+        >
             {backgroundRefs.map((_, i) => (
                 <Background key={i} ref={backgroundRefs[i]} />
             ))}
-        </>
+            {starRefs.map((_, i) => (
+                <Star key={i} ref={starRefs[i]} />
+            ))}
+        </div>
     );
 };
 
