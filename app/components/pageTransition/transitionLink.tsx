@@ -23,7 +23,7 @@ export const TransitionLink = ({ children, href, ...props }: TransitionLinkProps
         setIsAnimating(true);
         await animate();
         router.push(href.toString());
-        setIsAnimating(false);
+        // setIsAnimating(false);
     };
 
     return (

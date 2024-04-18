@@ -8,7 +8,7 @@ type RootContainerProps = {
 };
 
 const RootContainer = ({ children }: RootContainerProps): JSX.Element => {
-    return <div className={classes("relative", "w-full", "h-full", "overflow-x-hidden")}>{children}</div>;
+    return <div className={classes("relative", "w-full", "h-full")}>{children}</div>;
 };
 
 export default RootContainer;
