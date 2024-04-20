@@ -48,12 +48,12 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
                 return ref?.current?.animate(
                     [
                         {
-                            left: `${x}vw`,
+                            left: `${x - 0.5}vw`,
                             top: `${backgroundTop}vw`,
                             height: 0,
                         },
                         {
-                            left: `${x}vw`,
+                            left: `${x - 0.5}vw`,
                             top: `${backgroundTop}vw`,
                             height: `calc(100vh + ${unit}vw)`,
                         },

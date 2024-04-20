@@ -20,7 +20,8 @@ const Star = forwardRef<SVGSVGElement>((_, ref): JSX.Element => {
 
 // eslint-disable-next-line react/display-name
 const Background = forwardRef<HTMLDivElement>((_, ref): JSX.Element => {
-    return <div ref={ref} className="absolute -top-[5vw] h-0 w-[5vw] overflow-clip bg-base-100"></div>;
+    // widthは少し大きめに
+    return <div ref={ref} className="absolute -top-[5vw] h-0 w-[6vw] overflow-clip bg-base-100"></div>;
 });
 
 const PageTransitionAnimation = (): JSX.Element => {
