@@ -5,7 +5,7 @@ type CodeInlineProps = {
 };
 
 const CodeInline = ({ children }: CodeInlineProps): JSX.Element => {
-    return <code className="rounded bg-neutral px-1 text-neutral-content">{children}</code>;
+    return <code className="break-words rounded bg-neutral px-1 text-neutral-content">{children}</code>;
 };
 
 export default CodeInline;
