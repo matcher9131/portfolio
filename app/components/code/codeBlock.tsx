@@ -1,30 +1,15 @@
 import { type ReactNode } from "react";
+import { classes } from "../../util/classes";
 
 type CodeBlockProps = {
     readonly children: ReactNode;
-    readonly fileName?: string;
-    readonly language?: string;
 };
 
-const CodeBlock = ({ children, fileName, language }: CodeBlockProps): JSX.Element => {
+const CodeBlock = ({ children }: CodeBlockProps): JSX.Element => {
     return (
-        <div className="rounded-md bg-black text-white">
-            <div className="flex justify-between text-xs">
-                {fileName != null ? (
-                    <div className="rounded-tl-md bg-neutral px-1 py-0.5">{fileName}</div>
-                ) : (
-                    <div></div>
-                )}
-                {language != null ? (
-                    <div className="rounded-tr-md bg-neutral px-1 py-0.5">{language}</div>
-                ) : (
-                    <div></div>
-                )}
-            </div>
-            <pre className="code-block-body overflow-x-auto px-2 py-1">
-                <code>{children}</code>
-            </pre>
-        </div>
+        <pre className={classes("bg-black", "text-white", "px-2", "py-1", "rounded-md")}>
+            <code>{children}</code>
+        </pre>
     );
 };
 

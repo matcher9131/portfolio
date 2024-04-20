@@ -23,8 +23,8 @@ const Template = ({ children }: TemplateProps): JSX.Element => {
     }, [pathname, setIsAnimating]);
 
     return (
-        <div ref={ref} className="container mx-auto flex flex-col max-sm:px-4">
-            <header className="w-full">
+        <div ref={ref} className="">
+            <header>
                 <Breadcrumb />
             </header>
             <main>{children}</main>
