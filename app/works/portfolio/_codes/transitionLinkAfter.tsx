@@ -11,7 +11,7 @@ import CodeRow from "@/app/components/code/codeRow";
 const TransitionLinkAfter = (): JSX.Element => {
     // prettier-ignore
     return (
-        <CodeBlock fileName="TransitionLink.tsx" language="React">
+        <CodeBlock fileName="TransitionLink.tsx" language="TypeScript">
             <CodeRow>
                 <CodeKeyword>const</CodeKeyword>{" "}<CodeFunction>TransitionLink</CodeFunction>{" = ({ "}
                 <CodeParameter>children</CodeParameter>{", "}<CodeParameter>href</CodeParameter>{", "}{"..."}<CodeParameter>props</CodeParameter>{" }: "}<CodeType>TransitionLinkProps</CodeType>{") => {"}

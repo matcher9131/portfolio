@@ -12,7 +12,7 @@ import CodeRow from "@/app/components/code/codeRow";
 const TransitionLinkBefore = (): JSX.Element => {
     // prettier-ignore
     return (
-        <CodeBlock fileName="TransitionLink.tsx" language="React">
+        <CodeBlock fileName="TransitionLink.tsx" language="TypeScript">
             <CodeRow>
                 <CodeKeyword>const</CodeKeyword>{" "}<CodeFunction>TransitionLink</CodeFunction>{" = ({ "}
                 <CodeParameter><span className="underline decoration-wavy decoration-red-500">children</span></CodeParameter>{", "}<CodeParameter>href</CodeParameter>{", "}{"..."}<CodeParameter>props</CodeParameter>{" }: "}<CodeType>LinkProps</CodeType>{") => {"}
