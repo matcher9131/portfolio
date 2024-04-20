@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --c-scroll-track: #212121;
+    --c-scroll-thumb: #424242;
+}
+
+.code-block-body::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.code-block-body::-webkit-scrollbar-track {
+    background-color: var(--c-scroll-track);
+    border-radius: 3.5px;
+}
+
+.code-block-body::-webkit-scrollbar-thumb {
+    background-color: var(--c-scroll-thumb);
+    border-radius: 3.5px;
+}
+
 @layer base {
     h1 {
         @apply my-5 border-b-[1px] border-b-neutral-content text-3xl font-black leading-10;
@@ -19,18 +39,12 @@
         @apply my-1 leading-8;
     }
     ul {
-        @apply ml-8 list-disc;
+        @apply ml-8 list-disc max-lg:ml-4 max-lg:pl-2;
     }
     ol {
         @apply ml-8 list-decimal;
     }
     li {
         @apply leading-8;
-    }
-}
-
-@layer components {
-    article.main-article {
-        @apply mx-10 my-5;
     }
 }

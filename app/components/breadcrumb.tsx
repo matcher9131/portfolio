@@ -22,10 +22,13 @@ const Breadcrumb = (): JSX.Element | null => {
     ];
 
     return (
-        <nav className="breadcrumb">
-            <ol className="ml-0 flex list-none flex-row">
+        <nav className="breadcrumb w-full">
+            <ol className="ml-0 flex list-none pl-0">
                 {paths.map((element) => (
-                    <li key={element} className="before:mx-3 before:content-['>'] first-of-type:before:content-['']">
+                    <li
+                        key={element}
+                        className="before:mx-3 before:content-['>'] first-of-type:before:mx-0 first-of-type:before:content-['']"
+                    >
                         {element !== path ? (
                             <TransitionLink href={element} className="link">
                                 {getPageName(element) ?? element}
