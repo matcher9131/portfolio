@@ -2,7 +2,7 @@
 
 import { Inter } from "next/font/google";
 import "./globals.css";
-import BeforePageTransitionAnimation from "./components/pageTransition/beforePageTransitionAnimation";
+import PageTransitionAnimationBefore from "./components/pageTransition/pageTransitionAnimationBefore";
 import RootContainer from "./components/rootContainer";
 import RecoilContextProvider from "./recoilContextProvider";
 
@@ -18,7 +18,7 @@ const RootLayout = ({ children }: RootLayoutProps): JSX.Element => {
             <body className={`${inter.className}`}>
                 <RecoilContextProvider>
                     <RootContainer>
-                        <BeforePageTransitionAnimation />
+                        <PageTransitionAnimationBefore />
                         {children}
                     </RootContainer>
                 </RecoilContextProvider>

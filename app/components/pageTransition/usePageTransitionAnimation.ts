@@ -8,13 +8,13 @@ const delayStep = 25;
 const starUnit = 100 / numStars;
 const backgroundTop = (-(1 + Math.cos((72 / 180) * Math.PI)) / 2) * starUnit;
 
-const afterTransitionClipPath = new Array(5)
+const afterTransitionClipPath = `polygon(${new Array(5)
     .fill(0)
     .map(
         (_, i) =>
-            `calc(${-Math.sin(0.8 * i * Math.PI)} * max(100vw, 100vh) + 50vw) calc(${Math.cos(0.8 * i * Math.PI)} * max(100vw, 100vh) + 50vh)`,
+            `calc(${-Math.sin(0.8 * i * Math.PI)} * max(100vw, 100vh) + 50vw) calc(${-Math.cos(0.8 * i * Math.PI)} * max(100vw, 100vh) + 50vh)`,
     )
-    .join(", ");
+    .join(", ")})`;
 
 type UsePageTransitionAnimationReturnType = {
     readonly animateBeforeTransition: () => Promise<void>;
@@ -84,12 +84,10 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
             ?.animate(
                 [
                     {
-                        // clipPath: "polygon(50vw 50vh, 50vw 50vh, 50vw 50vh, 50vw 50vh, 50vw 50vh)",
-                        clipPath: "circle(0vw at 50vw 50vh)",
+                        clipPath: "polygon(50vw 50vh, 50vw 50vh, 50vw 50vh, 50vw 50vh, 50vw 50vh)",
                     },
                     {
-                        // clipPath: afterTransitionClipPath,
-                        clipPath: "circle(max(100vw, 100vh) at 50vw 50vh)",
+                        clipPath: afterTransitionClipPath,
                         offset: 0.99,
                     },
                     {
@@ -97,8 +95,9 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
                     },
                 ],
                 {
-                    duration: 500,
+                    duration: 750,
                     fill: "forwards",
+                    easing: "ease-in",
                 },
             )
             ?.finished?.then(() => {});

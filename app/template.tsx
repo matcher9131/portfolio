@@ -17,7 +17,7 @@ const Template = ({ children }: TemplateProps): JSX.Element => {
     const [, setIsAnimating] = useRecoilState(isAnimatingState);
     const { resetBeforeTransitionAnimation, animateAfterTransition } = usePageTransitionAnimation();
 
-    // URL遷移後のフェードイン
+    // URL遷移後のアニメーション
     useEffect(() => {
         setIsAnimating(false);
         resetBeforeTransitionAnimation();
@@ -25,11 +25,13 @@ const Template = ({ children }: TemplateProps): JSX.Element => {
     }, [pathname, setIsAnimating]);
 
     return (
-        <div ref={ref} className="container relative mx-auto flex flex-col max-sm:px-4">
-            <header className="w-full">
-                <Breadcrumb />
-            </header>
-            <main>{children}</main>
+        <div ref={ref}>
+            <div className="container mx-auto flex flex-col max-sm:px-4">
+                <header className="w-full">
+                    <Breadcrumb />
+                </header>
+                <main>{children}</main>
+            </div>
         </div>
     );
 };

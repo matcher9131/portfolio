@@ -24,7 +24,7 @@ const Background = forwardRef<HTMLDivElement>((_, ref): JSX.Element => {
     return <div ref={ref} className="absolute -top-[5vw] h-0 w-[6vw] overflow-clip bg-base-100"></div>;
 });
 
-const BeforePageTransitionAnimation = (): JSX.Element => {
+const PageTransitionAnimationBefore = (): JSX.Element => {
     const starRefs = useRecoilValue(starRefStates);
     const backgroundRefs = useRecoilValue(backgroundRefStates);
 
@@ -50,4 +50,4 @@ const BeforePageTransitionAnimation = (): JSX.Element => {
     );
 };
 
-export default BeforePageTransitionAnimation;
+export default PageTransitionAnimationBefore;
