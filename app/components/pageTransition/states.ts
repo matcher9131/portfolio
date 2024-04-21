@@ -15,6 +15,12 @@ export const backgroundRefStates = atom<readonly RefObject<HTMLDivElement>[]>({
     dangerouslyAllowMutability: true,
 });
 
+export const clipRefState = atom<RefObject<HTMLDivElement>>({
+    key: "clipRefState",
+    default: createRef(),
+    dangerouslyAllowMutability: true,
+});
+
 export const isAnimatingState = atom<boolean>({
     key: "isAnimatingState",
     default: false,

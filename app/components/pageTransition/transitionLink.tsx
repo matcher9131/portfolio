@@ -13,15 +13,14 @@ type TransitionLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, k
 
 export const TransitionLink = ({ children, href, ...props }: TransitionLinkProps): JSX.Element => {
     const router = useRouter();
-    const { animate, reset } = usePageTransitionAnimation();
+    const { animateBeforeTransition } = usePageTransitionAnimation();
     const [isAnimating, setIsAnimating] = useRecoilState(isAnimatingState);
     const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>): Promise<void> => {
         e.preventDefault();
         if (isAnimating) return;
 
-        await reset();
         setIsAnimating(true);
-        await animate();
+        await animateBeforeTransition();
         router.push(href.toString());
         // setIsAnimating(false);
     };

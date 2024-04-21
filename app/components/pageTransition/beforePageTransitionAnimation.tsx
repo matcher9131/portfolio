@@ -2,7 +2,7 @@
 
 import { forwardRef } from "react";
 import { useRecoilValue } from "recoil";
-import { backgroundRefStates, isAnimatingState, starRefStates } from "./states";
+import { backgroundRefStates, starRefStates } from "./states";
 import { classes } from "@/app/util/classes";
 
 // eslint-disable-next-line react/display-name
@@ -24,8 +24,7 @@ const Background = forwardRef<HTMLDivElement>((_, ref): JSX.Element => {
     return <div ref={ref} className="absolute -top-[5vw] h-0 w-[6vw] overflow-clip bg-base-100"></div>;
 });
 
-const PageTransitionAnimation = (): JSX.Element => {
-    const isAnimating = useRecoilValue(isAnimatingState);
+const BeforePageTransitionAnimation = (): JSX.Element => {
     const starRefs = useRecoilValue(starRefStates);
     const backgroundRefs = useRecoilValue(backgroundRefStates);
 
@@ -38,7 +37,7 @@ const PageTransitionAnimation = (): JSX.Element => {
                 "z-10",
                 "overflow-hidden",
                 "bg-transparent",
-                isAnimating ? "block" : "hidden",
+                "pointer-events-none",
             )}
         >
             {backgroundRefs.map((_, i) => (
@@ -51,4 +50,4 @@ const PageTransitionAnimation = (): JSX.Element => {
     );
 };
 
-export default PageTransitionAnimation;
+export default BeforePageTransitionAnimation;
