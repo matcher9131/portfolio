@@ -20,7 +20,7 @@ const TransitionLinkAfter = (): JSX.Element => {
                 <CodeKeyword>const</CodeKeyword>{" "}<CodeVariable>router</CodeVariable>{" = "}<CodeFunction>useRouter</CodeFunction>{"();"}
             </CodeRow>
             <CodeRow indent={1}>
-                <CodeKeyword>const</CodeKeyword>{" { "}<CodeFunction>animate</CodeFunction>{" } = "}<CodeFunction>usePageTransitionAnimation</CodeFunction>{"();"}
+                <CodeKeyword>const</CodeKeyword>{" { "}<CodeFunction>animateBeforeTransition</CodeFunction>{" } = "}<CodeFunction>usePageTransitionAnimation</CodeFunction>{"();"}
             </CodeRow>
             <CodeRow indent={1}>
                 <CodeKeyword>const</CodeKeyword>{" "}<CodeFunction>handleClick</CodeFunction>{" = "}<CodeKeyword>async</CodeKeyword>{" ("}<CodeParameter>e</CodeParameter>{": "}<CodeType>React</CodeType>{"."}<CodeType>MouseEvent</CodeType>{"<"}<CodeType>HTMLAnchorElement</CodeType>{">) => {"}
@@ -30,7 +30,7 @@ const TransitionLinkAfter = (): JSX.Element => {
             </CodeRow>
             <CodeRow></CodeRow>
             <CodeRow indent={2}>
-                <CodeStatement>await</CodeStatement>{" "}<CodeFunction>animate</CodeFunction>{"();"}
+                <CodeStatement>await</CodeStatement>{" "}<CodeFunction>animateBeforeTransition</CodeFunction>{"();"}
             </CodeRow>
             <CodeRow></CodeRow>
             <CodeRow indent={2}>

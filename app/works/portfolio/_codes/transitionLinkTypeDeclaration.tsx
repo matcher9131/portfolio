@@ -7,7 +7,7 @@ import CodeRow from "@/app/components/code/codeRow";
 const TransitionLinkTypeDeclaration = (): JSX.Element => {
     // prettier-ignore
     return (
-        <CodeBlock>
+        <CodeBlock language="TypeScript">
             <CodeRow>
                 <CodeKeyword>type</CodeKeyword>{" "}<CodeType>TransitionLinkProps</CodeType>{" = "}
                 <CodeType>Omit</CodeType>{"<"}

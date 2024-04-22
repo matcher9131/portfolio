@@ -8,7 +8,7 @@ import CodeRow from "@/app/components/code/codeRow";
 export const LinkTypeDeclaration = (): JSX.Element => {
     // prettier-ignore
     return (
-        <CodeBlock>
+        <CodeBlock language="TypeScript">
             <CodeRow>
                 <CodeKeyword>declare</CodeKeyword>{" "}
                 <CodeKeyword>const</CodeKeyword>{" "}
@@ -33,7 +33,6 @@ export const LinkTypeDeclaration = (): JSX.Element => {
                 {">"}
                 {">;"}
             </CodeRow>
-
         </CodeBlock>
     );
 };
