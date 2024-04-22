@@ -1,6 +1,7 @@
 import { pageProperties as multiTimerPageProperties } from "../works/multitimer/properties";
 import { pageProperties as worksPageProperties } from "../works/properties";
 import { pageProperties as slidePageProperties } from "../works/slide/properties";
+import { pageProperties as portfolioPageProperties } from "../works/portfolio/properties";
 
 export type PageProperty = {
     readonly path: string;
@@ -16,6 +17,7 @@ const pageProperties: readonly PageProperty[] = [
     worksPageProperties,
     multiTimerPageProperties,
     slidePageProperties,
+    portfolioPageProperties,
 ];
 
 export const getPageName = (path: string): string | null =>
