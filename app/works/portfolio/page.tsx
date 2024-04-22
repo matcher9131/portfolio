@@ -1,9 +1,10 @@
 import { pageProperties } from "../properties";
+import AnimateBeforeTransition from "./_codes/animateBeforeTransition";
 import { LinkTypeDeclaration } from "./_codes/linkTypeDeclaration";
+import TemplateEffect from "./_codes/templateEffect";
 import TransitionLinkAfter from "./_codes/transitionLinkAfter";
 import TransitionLinkBefore from "./_codes/transitionLinkBefore";
 import TransitionLinkTypeDeclaration from "./_codes/transitionLinkTypeDeclaration";
-import UsePageTransitionAnimationCode from "./_codes/usePageTransitionAnimationCode";
 import CodeBlock from "@/app/components/code/codeBlock";
 import CodeInline from "@/app/components/code/codeInline";
 
@@ -79,7 +80,7 @@ const Portfolio = (): JSX.Element => {
                 これを実現するために使える技術を選定していく。
             </p>
 
-            <h4>技術選定</h4>
+            <h4>ページ遷移後のアニメーションの技術選定</h4>
             <ul>
                 <li>
                     View Transitions API
@@ -168,19 +169,52 @@ const Portfolio = (): JSX.Element => {
             <TransitionLinkTypeDeclaration />
             <p>
                 あとは<CodeInline>usePageTransitionAnimation</CodeInline>
-                というカスタムフックを用意して、そこで実際にアニメーションを行うメソッド<CodeInline>animate</CodeInline>
+                というカスタムフックを用意して、そこで実際にページ遷移前のアニメーションを行うメソッド
+                <CodeInline>animateBeforeTransition</CodeInline>
                 を実装する。Web Animation APIの<CodeInline>animate</CodeInline>メソッドはアニメーション終了を知らせる
                 <CodeInline>Promise</CodeInline>オブジェクトを返してくれるので、<CodeInline>Promise.all</CodeInline>
                 で待つことにより全てのアニメーションが終了してからページ遷移に移ることができる。
             </p>
-            <UsePageTransitionAnimationCode />
+            <AnimateBeforeTransition />
             <p>
                 これを<CodeInline>TransitionLink</CodeInline>で使えばOK。
             </p>
             <TransitionLinkAfter />
 
+            <h4>ページ遷移後のアニメーションの技術選定</h4>
+            <p>
+                ページ遷移前アニメーションはほぼイメージ通り実装できたが、遷移後すぐにページが表示されるとちょっと味気ない感じになってしまったので、ページ遷移後のアニメーションもつけることにした。
+                <br />
+                ページ全体がふわっと表示される（<CodeInline>opacity</CodeInline>
+                を0から1にする）などでも良かったのだが、折角なのでもう少し凝ってみることにして、星形の窓が拡大していくというのを考えた。
+                <br />
+                これを実装する技術として以下の2つがあるが
+            </p>
+            <ul>
+                <li>
+                    SVGの<CodeInline>mask</CodeInline>要素
+                </li>
+                <li>
+                    CSSの<CodeInline>clip-path</CodeInline>プロパティ
+                </li>
+            </ul>
+            <p>
+                星形を作るだけならそこまで複雑ではないので、CSSの<CodeInline>clip-path</CodeInline>
+                プロパティを用いて例によってWeb Animation APIの<CodeInline>animate</CodeInline>
+                メソッドで実装することにする。
+            </p>
+
             <h4>ページ遷移後のアニメーションの実装</h4>
-            <p>NOT IMPLEMENTED</p>
+            <p>
+                先述のカスタムフック<CodeInline>usePageTransitionAnimation</CodeInline>
+                にページ遷移後のアニメーションを行うメソッド
+                <CodeInline>animateBeforeTransition</CodeInline>
+                を実装し、これを然るべきところでimportして使う。
+                <br />
+                その然るべき場所というのは<CodeInline>template</CodeInline>である。<CodeInline>useEffect</CodeInline>
+                でURLの変化を検知し、そこに<CodeInline>animateBeforeTransition</CodeInline>を仕込む。
+            </p>
+            <TemplateEffect />
         </article>
     );
 };

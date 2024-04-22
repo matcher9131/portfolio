@@ -9,7 +9,7 @@ import CodeType from "@/app/components/code/codeHighlight/codeType";
 import CodeVariable from "@/app/components/code/codeHighlight/codeVariable";
 import CodeRow from "@/app/components/code/codeRow";
 
-const UsePageTransitionAnimationCode = (): JSX.Element => {
+const AnimateBeforeTransition = (): JSX.Element => {
     // prettier-ignore
     return (
         <CodeBlock fileName="usePageTransitionAnimation.ts" language="TypeScript">
@@ -17,7 +17,7 @@ const UsePageTransitionAnimationCode = (): JSX.Element => {
                 <CodeComment>{"// refsはアニメーションさせるDOM要素のrefによる配列"}</CodeComment>
             </CodeRow>
             <CodeRow>
-                <CodeKeyword>const</CodeKeyword>{" "}<CodeFunction>animate</CodeFunction>{" = "}{"() => {"}
+                <CodeKeyword>const</CodeKeyword>{" "}<CodeFunction>animateBeforeTransition</CodeFunction>{" = "}{"() => {"}
             </CodeRow>
             <CodeRow indent={1}>
                 <CodeStatement>return</CodeStatement> <CodeType>Promise</CodeType>{"."}<CodeFunction>all</CodeFunction>{"("}
@@ -35,4 +35,4 @@ const UsePageTransitionAnimationCode = (): JSX.Element => {
     );
 };
 
-export default UsePageTransitionAnimationCode;
+export default AnimateBeforeTransition;
