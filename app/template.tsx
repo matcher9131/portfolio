@@ -22,7 +22,7 @@ const Template = ({ children }: TemplateProps): JSX.Element => {
         setIsAnimating(false);
         resetBeforeTransitionAnimation();
         animateAfterTransition();
-    }, [pathname, setIsAnimating]);
+    }, [pathname, setIsAnimating, animateAfterTransition, resetBeforeTransitionAnimation]);
 
     return (
         <div ref={ref}>

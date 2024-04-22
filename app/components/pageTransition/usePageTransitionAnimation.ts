@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import { useRecoilValue } from "recoil";
 import { backgroundRefStates, numStars, starRefStates, clipRefState } from "./states";
 
@@ -20,7 +21,6 @@ type UsePageTransitionAnimationReturnType = {
     readonly animateBeforeTransition: () => Promise<void>;
     readonly animateAfterTransition: () => Promise<void> | undefined;
     readonly resetBeforeTransitionAnimation: () => Promise<void>;
-    // readonly resetAfterTransitionAnimation: () => Promise<void> | undefined;
 };
 
 export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnType => {
@@ -28,7 +28,7 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
     const backgroundRefs = useRecoilValue(backgroundRefStates);
     const clipRef = useRecoilValue(clipRefState);
 
-    const animateBeforeTransition = (): Promise<void> => {
+    const animateBeforeTransition = useCallback((): Promise<void> => {
         const delays = starRefs
             .map((_, i) => ({ index: i, value: Math.random() }))
             .toSorted((a, b) => a.value - b.value)
@@ -77,9 +77,9 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
                 )?.finished;
             }),
         ]).then(() => {});
-    };
+    }, [backgroundRefs, starRefs]);
 
-    const animateAfterTransition = (): Promise<void> | undefined => {
+    const animateAfterTransition = useCallback((): Promise<void> | undefined => {
         return clipRef?.current
             ?.animate(
                 [
@@ -101,10 +101,10 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
                 },
             )
             ?.finished?.then(() => {});
-    };
+    }, [clipRef]);
 
     // 単にHTMLElement.styleを設定するだけでは効かないのでanimateさせる
-    const resetBeforeTransitionAnimation = (): Promise<void> => {
+    const resetBeforeTransitionAnimation = useCallback((): Promise<void> => {
         return Promise.all([
             ...starRefs.map(
                 (ref) =>
@@ -121,18 +121,11 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
                     })?.finished,
             ),
         ]).then(() => {});
-    };
-
-    // const resetAfterTransitionAnimation = (): Promise<void> | undefined => {
-    //     return clipRef?.current
-    //         ?.animate([{ clipPath: "none" }], { duration: 1, fill: "forwards" })
-    //         ?.finished?.then(() => {});
-    // };
+    }, [backgroundRefs, starRefs]);
 
     return {
         animateBeforeTransition,
         animateAfterTransition,
         resetBeforeTransitionAnimation,
-        // resetAfterTransitionAnimation,
     };
 };
