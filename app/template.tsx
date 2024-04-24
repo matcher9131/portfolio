@@ -14,15 +14,19 @@ type TemplateProps = {
 const Template = ({ children }: TemplateProps): JSX.Element => {
     const ref = useRecoilValue(clipRefState);
     const pathname = usePathname();
-    const [, setIsAnimating] = useRecoilState(isAnimatingState);
+    const [isAnimating, setIsAnimating] = useRecoilState(isAnimatingState);
     const { resetBeforeTransitionAnimation, animateAfterTransition } = usePageTransitionAnimation();
 
-    // URL遷移後のアニメーション
+    // ページ遷移後のアニメーション
     useEffect(() => {
+        // ページ遷移前アニメーションをしていないときはページ遷移後アニメーションもしない
+        if (!isAnimating) return;
+
         setIsAnimating(false);
         resetBeforeTransitionAnimation();
         animateAfterTransition();
-    }, [pathname, setIsAnimating, animateAfterTransition, resetBeforeTransitionAnimation]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname, setIsAnimating, animateAfterTransition, resetBeforeTransitionAnimation]); // isAnimatingには依存しない
 
     return (
         <div ref={ref}>

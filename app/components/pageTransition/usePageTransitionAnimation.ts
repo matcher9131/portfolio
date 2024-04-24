@@ -2,12 +2,12 @@
 
 import { useCallback } from "react";
 import { useRecoilValue } from "recoil";
+import { getKeyframesFactory } from "./pageTransitionKeyframes";
 import { backgroundRefStates, numStars, starRefStates, clipRefState } from "./states";
 
-const beforeTransitionDuration = 500;
+const beforeTransitionDuration = 350;
 const delayStep = 25;
 const starUnit = 100 / numStars;
-const backgroundTop = (-(1 + Math.cos((72 / 180) * Math.PI)) / 2) * starUnit;
 
 const afterTransitionClipPath = `polygon(${new Array(5)
     .fill(0)
@@ -33,49 +33,24 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
             .map((_, i) => ({ index: i, value: Math.random() }))
             .toSorted((a, b) => a.value - b.value)
             .map(({ index }) => index * delayStep);
+        const keyframesProvider = getKeyframesFactory(Math.random());
         return Promise.all([
-            ...starRefs.map((ref, i) => {
-                const x = i * starUnit;
-                return ref?.current?.animate(
-                    [
-                        {
-                            left: `${x}vw`,
-                            top: `${-starUnit}vw`,
-                        },
-                        {
-                            left: `${x}vw`,
-                            top: `100vh`,
-                        },
-                    ],
-                    {
+            ...starRefs.map(
+                (ref, i) =>
+                    ref?.current?.animate(keyframesProvider.getStarKeyframes(i), {
                         duration: beforeTransitionDuration,
                         delay: delays[i],
                         fill: "forwards",
-                    },
-                )?.finished;
-            }),
-            ...backgroundRefs.map((ref, i) => {
-                const x = i * starUnit;
-                return ref?.current?.animate(
-                    [
-                        {
-                            left: `${x - 0.5}vw`,
-                            top: `${backgroundTop}vw`,
-                            height: 0,
-                        },
-                        {
-                            left: `${x - 0.5}vw`,
-                            top: `${backgroundTop}vw`,
-                            height: `calc(100vh + ${starUnit}vw)`,
-                        },
-                    ],
-                    {
+                    })?.finished,
+            ),
+            ...backgroundRefs.map(
+                (ref, i) =>
+                    ref?.current?.animate(keyframesProvider.getBackgroundKeyframes(i), {
                         duration: beforeTransitionDuration,
                         delay: delays[i],
                         fill: "forwards",
-                    },
-                )?.finished;
-            }),
+                    })?.finished,
+            ),
         ]).then(() => {});
     }, [backgroundRefs, starRefs]);
 
@@ -95,7 +70,7 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
                     },
                 ],
                 {
-                    duration: 750,
+                    duration: 150,
                     fill: "forwards",
                     easing: "ease-in",
                 },
