@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import { getKeyframesFactory } from "./pageTransitionKeyframes";
 import { backgroundRefStates, numStars, starRefStates, clipRefState } from "./states";
 
-const beforeTransitionDuration = 5000;
+const beforeTransitionDuration = 350;
 const delayStep = 25;
 const starUnit = 100 / numStars;
 
@@ -70,7 +70,7 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
                     },
                 ],
                 {
-                    duration: 750,
+                    duration: 150,
                     fill: "forwards",
                     easing: "ease-in",
                 },
