@@ -1,5 +1,6 @@
 import { type Metadata } from "next";
 import { siteTitle } from "./_shared/const";
+import { getChildPages } from "./_shared/pageProperties";
 import { TransitionLink } from "./components/pageTransition/transitionLink";
 
 export const metadata: Metadata = {
@@ -8,8 +9,12 @@ export const metadata: Metadata = {
 
 const Home = (): JSX.Element => {
     return (
-        <main>
-            <TransitionLink href="/works">Works</TransitionLink>
+        <main className="flex gap-x-3">
+            {getChildPages().map(({ name, path }) => (
+                <TransitionLink key={name} href={path}>
+                    {name}
+                </TransitionLink>
+            ))}
         </main>
     );
 };
