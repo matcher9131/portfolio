@@ -1,11 +1,11 @@
-"use client";
-
-import { useRef, useEffect } from "react";
-import { delayStep } from "./const";
+import { useRecoilValue } from "recoil";
+import { classes } from "../util/classes";
+import { type SkillGroupItem } from "./models";
+import { skillStarsRefState } from "./states";
 
 const Star = ({ refCallback }: { readonly refCallback: (instance: SVGSVGElement) => void }): JSX.Element => {
     return (
-        <svg ref={refCallback} viewBox="-100 -100 200 200" className="w-6">
+        <svg ref={refCallback} viewBox="-100 -100 200 200" className="w-6 opacity-0">
             <polygon
                 fill="yellow"
                 fillRule="nonzero"
@@ -15,64 +15,27 @@ const Star = ({ refCallback }: { readonly refCallback: (instance: SVGSVGElement)
     );
 };
 
-const animationTimeOffset = 150;
-
-type SkillGroupProps = {
-    readonly groupName: string;
-    readonly skills: readonly { readonly name: string; readonly value: number }[];
-    readonly animationStartTime: number;
-};
-
-const SkillGroup = ({ groupName, skills, animationStartTime }: SkillGroupProps): JSX.Element => {
-    const starsRef = useRef<Map<string, SVGSVGElement> | null>(null);
-
-    const getStarRefMap = (): Map<string, SVGSVGElement> => {
-        if (starsRef.current == null) {
-            starsRef.current = new Map();
-        }
-        return starsRef.current;
-    };
-
-    useEffect(() => {
-        let delay = 0;
-        for (const [, star] of getStarRefMap()) {
-            star.animate(
-                [
-                    { transform: "scale(0)" },
-                    {
-                        transform: "scale(0)",
-                        offset:
-                            (animationTimeOffset + animationStartTime + delay) /
-                            (animationTimeOffset + animationStartTime + delay + 500),
-                    },
-                    { transform: "scale(1)" },
-                ],
-                { duration: animationTimeOffset + animationStartTime + delay + 500 },
-            );
-            delay += delayStep;
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []); // ページ読み込みのたびにアニメーションさせるので依存配列は空にする
+const SkillGroup = ({ groupName, skills, isWide }: SkillGroupItem): JSX.Element => {
+    const starsMap = useRecoilValue(skillStarsRefState);
 
     return (
-        <>
-            <h2>{groupName}</h2>
-            <table className="table">
-                <tbody>
+        <section className={classes("mx-auto", isWide && "md:col-span-2")}>
+            <h2 className="text-center">{groupName}</h2>
+            <table className={classes("grid", isWide && "md:grid-cols-2")}>
+                <tbody className="contents">
                     {skills.map(({ name, value }) => (
-                        <tr key={name}>
-                            <td>{name}</td>
-                            <td className="flex gap-x-1">
+                        <tr key={name} className="my-3 flex">
+                            <td className="w-48 flex-1 px-3 text-right">{name}</td>
+                            <td className="flex flex-1 gap-x-1 px-3" aria-label={`レベル${value}`}>
                                 {new Array(value).fill(0).map((_, i) => (
                                     <Star
                                         key={i}
                                         refCallback={(node) => {
-                                            const map = getStarRefMap();
                                             const key = `${name}-${i}`;
-                                            map.set(key, node);
+                                            starsMap.set(key, node);
 
                                             return () => {
-                                                map.delete(key);
+                                                starsMap.delete(key);
                                             };
                                         }}
                                     />
@@ -82,7 +45,7 @@ const SkillGroup = ({ groupName, skills, animationStartTime }: SkillGroupProps):
                     ))}
                 </tbody>
             </table>
-        </>
+        </section>
     );
 };
 

@@ -1,73 +1,49 @@
-import { delayStep } from "./const";
+"use client";
+
+import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { skillDictionary, delayStep } from "./models";
 import { pageProperties } from "./properties";
 import SkillGroup from "./skillGroup";
+import { skillStarsRefState } from "./states";
 
-const skillDictionary = [
-    {
-        groupName: "Languages",
-        skills: [
-            { name: "C#", value: 5 },
-            { name: "TypeScript", value: 5 },
-            { name: "JavaScript", value: 5 },
-            { name: "Google Apps Script", value: 5 },
-            { name: "HTML", value: 5 },
-            { name: "CSS", value: 4 },
-            { name: "XAML", value: 4 },
-            { name: "C++", value: 3 },
-            { name: "Dart", value: 3 },
-            { name: "Java", value: 2 },
-            { name: "C", value: 2 },
-            { name: "Rust", value: 1 },
-        ],
-    },
-    {
-        groupName: "Frameworks / Libraries",
-        skills: [
-            { name: "React", value: 5 },
-            { name: "Tailwind CSS", value: 5 },
-            { name: "WPF", value: 5 },
-            { name: "styled-components", value: 5 },
-            { name: "Vue.js", value: 4 },
-            { name: "Recoil", value: 4 },
-            { name: "Reactive Property", value: 4 },
-            { name: "Flutter", value: 3 },
-        ],
-    },
-    {
-        groupName: "Environments / Tools",
-        skills: [
-            { name: "Node.js", value: 5 },
-            { name: "Deno", value: 5 },
-            { name: "Git / GitHub", value: 4 },
-            { name: "Vite", value: 4 },
-            { name: "ESLint", value: 4 },
-            { name: "Webpack", value: 2 },
-        ],
-    },
-];
-
-const skillDictionaryWithAnimationStartTime = skillDictionary
-    .reduce(
-        (acc, group) => [
-            ...acc,
-            {
-                ...group,
-                animationStartTime:
-                    acc[acc.length - 1].animationStartTime +
-                    acc[acc.length - 1].skills.reduce((sum, { value }) => sum + value * delayStep, 0),
-            },
-        ],
-        [{ groupName: "dummy", skills: [] as { name: string; value: number }[], animationStartTime: 0 }],
-    )
-    .toSpliced(0, 1);
+const animationTimeOffset = 150;
 
 const Skills = (): JSX.Element => {
+    const starsMap = useRecoilValue(skillStarsRefState);
+
+    useEffect(() => {
+        const stars = [...starsMap.values()];
+        stars.sort((a, b) => {
+            const aRect = a.getBoundingClientRect();
+            const bRect = b.getBoundingClientRect();
+            return aRect.top === bRect.top ? aRect.left - bRect.left : aRect.top - bRect.top;
+        });
+        stars.forEach((star, i) => {
+            star.animate(
+                [
+                    { transform: "scale(0)", opacity: 1 },
+                    {
+                        transform: "scale(0)",
+                        opacity: 1,
+                        offset: (animationTimeOffset + i * delayStep) / (animationTimeOffset + i * delayStep + 500),
+                    },
+                    { transform: "scale(1)", opacity: 1 },
+                ],
+                { duration: animationTimeOffset + i * delayStep + 500, fill: "forwards" },
+            );
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []); // ページ読み込みのたびにアニメーションさせるので依存配列は空にする
+
     return (
         <article className="main-article">
             <h1>{pageProperties.name}</h1>
-            {skillDictionaryWithAnimationStartTime.map((props) => (
-                <SkillGroup key={props.groupName} {...props} />
-            ))}
+            <div className="mx-auto grid max-w-screen-md md:grid-cols-2">
+                {skillDictionary.map((props) => (
+                    <SkillGroup key={props.groupName} {...props} />
+                ))}
+            </div>
         </article>
     );
 };
