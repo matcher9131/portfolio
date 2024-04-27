@@ -1,5 +1,4 @@
 import { type Metadata } from "next";
-import { Fragment } from "react";
 import { getWorksPages } from "../_shared/pageProperties";
 import { TransitionLink } from "../components/pageTransition/transitionLink";
 import { pageProperties } from "./properties";
@@ -20,19 +19,22 @@ const Works = (): JSX.Element => {
                 className="w-full max-w-screen-sm"
             ></iframe>
 
-            <h2>作品一覧</h2>
-            <dl className="leading-8 [&_dd]:pl-4">
+            <h2>Lineup</h2>
+            <section className="flex gap-x-4">
                 {getWorksPages().map((page) => (
-                    <Fragment key={page.path}>
-                        <dt>
-                            <TransitionLink href={page.path} className="link">
-                                {page.name}
-                            </TransitionLink>
-                        </dt>
-                        <dd>{page.description}</dd>
-                    </Fragment>
+                    <TransitionLink
+                        key={page.path}
+                        href={page.path}
+                        className="card card-compact w-72 transition-all hover:-translate-y-1 hover:bg-base-200"
+                    >
+                        <figure>ここに画像</figure>
+                        <div className="card-body">
+                            <h2>{page.name}</h2>
+                            <p>{page.description}</p>
+                        </div>
+                    </TransitionLink>
                 ))}
-            </dl>
+            </section>
         </article>
     );
 };
