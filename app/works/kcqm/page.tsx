@@ -3,6 +3,7 @@ import PropsDestructure from "./_code/propsDestructure";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
 import CodeInline from "@/app/components/code/codeInline";
+import ExternalLink from "@/app/components/externalLink";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,
@@ -32,9 +33,7 @@ const KanColleQuestManager = (): JSX.Element => {
                 <li>非公式Wikiの内容をスクレイピングし、半自動的にデータを更新</li>
                 <li>
                     その他の機能は
-                    <a href="https://kc-quest.net/help" target="_blank">
-                        艦これ任務リストマネージャー ヘルプ
-                    </a>
+                    <ExternalLink href="https://kc-quest.net/help">艦これ任務リストマネージャー ヘルプ</ExternalLink>
                     を参照ください
                 </li>
             </ul>
@@ -132,11 +131,11 @@ const KanColleQuestManager = (): JSX.Element => {
                     完全に余談になるが、AppleのLocal
                     Storageを制限するという方針は、「包丁は人に危害を及ぼす行為にも使われるので規制する」と主張するようなもので、はっきり言って愚策でしかないと考える。制限されるべきは個人を特定できる情報をLocal
                     Storageにホイホイ保存するような実装をする人間であって、Local
-                    Storageの機能自体が制限されるべきではない。どうも昔からAppleはこの辺のピントがずれているというか…。そしてそんなことをやってる暇があるならCSSの対応状況をもっとまともにしたらどうなんだと
+                    Storageの機能自体が制限されるべきではない。どうも昔からAppleはこの辺のピントがずれているというか…。そしてそんなことをやっている暇があるならCSSの対応状況をもっとマシにしたらどうなんだと
                 </p>
             </details>
             <p>
-                …話が逸れたが、これはもう調べても代替手段が無いようなので、Safariは動作保証対象外としてLocal
+                …話が逸れたが、これは調べてももう代替手段が無いようなので、Safariは動作保証対象外としてLocal
                 Storageを使用することにした。
             </p>
 
@@ -152,16 +151,16 @@ const KanColleQuestManager = (): JSX.Element => {
                     型システムが柔軟かつ強力
                     <ul>
                         <li>
+                            ユニオンタイプの使い勝手が良さと堅牢さが素晴らしすぎて、早くC#にも来ないかなと思ってしまうほど
+                        </li>
+                        <li>
                             あ、<CodeInline>any</CodeInline>は
-                            <a
+                            <ExternalLink
                                 href="https://qiita.com/uhyo/items/aae57ba0734e36ee846a"
                                 title="敗北者のTypeScript"
-                                target="_blank"
-                                rel="noreferrer noopener"
-                                className="link"
                             >
                                 敗北者なのでお帰りください
-                            </a>
+                            </ExternalLink>
                         </li>
                     </ul>
                 </li>
@@ -173,7 +172,7 @@ const KanColleQuestManager = (): JSX.Element => {
                     <ul>
                         <li>
                             実行してからはじめて<CodeInline>TypeError: Cannot read properties of undefined</CodeInline>
-                            やら<CodeInline>TypeError: foo is not a function</CodeInline>やら言われても面倒くさい
+                            やら<CodeInline>TypeError: foo is not a function</CodeInline>やら言われても…
                         </li>
                     </ul>
                 </li>
@@ -183,7 +182,6 @@ const KanColleQuestManager = (): JSX.Element => {
                         <li>数日間触っていないファイルでもIDEの助けを借りれば把握しやすい</li>
                     </ul>
                 </li>
-
                 <li>ユーザーが多いため情報が豊富 && 新しい</li>
                 <li>私自身が静的型付け言語をベースとした思考回路を持っているので動的型付けは落ち着かない</li>
             </ul>
@@ -209,8 +207,63 @@ const KanColleQuestManager = (): JSX.Element => {
                 ※ライブラリを使えばアロー関数式の本体ブロック内で分割代入ができるようだが、引数での分割はやはり無理そう。
             </p>
 
-            <h4>状態管理ライブラリ</h4>
+            <h3>状態管理ライブラリ</h3>
             <ul>
+                <li>
+                    ライブラリを使わない
+                    <ul>
+                        <li>
+                            <CodeInline>props</CodeInline>バケツリレー
+                            <ul>
+                                <li>
+                                    <span className="line-through">流石に面倒くさすぎる</span>
+                                </li>
+                                <li>Presentationのためのpropsと状態管理のためのpropsが混ざるのは保守面でも良くない</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <CodeInline>useContext</CodeInline>
+                            <ul>
+                                <li>
+                                    <ExternalLink href="https://zenn.dev/kazuma1989/articles/68c2339e056530">
+                                        ぼくのかんがえたさいきょうの useState + useContext よりも Redux
+                                        のほうが大抵勝っている
+                                    </ExternalLink>
+                                    を読んで、これもないと判断
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Redux
+                    <ul>
+                        <li>
+                            昔からあるメジャーな状態管理ライブラリ
+                            <ul>
+                                <li>古くからあるためいわゆる「枯れた技術」</li>
+                            </ul>
+                        </li>
+                        <li>お決まりの作法があり、書き方がブレない</li>
+                        <li>
+                            ただしそのお決まりの作法のせいで簡単な状態操作を書くだけでもシンプルにできない
+                            <ul>
+                                <li>
+                                    Action毎に<CodeInline>type</CodeInline>を割り振って引数などを
+                                    <CodeInline>payload</CodeInline>に設定し
+                                </li>
+                                <li>
+                                    ReducerではActionの<CodeInline>type</CodeInline>を<CodeInline>switch文</CodeInline>
+                                    などで分岐させて状態操作の実装を書き
+                                </li>
+                                <li>
+                                    そしてコンポーネントでActionを作って<CodeInline>dispatch</CodeInline>する
+                                </li>
+                            </ul>
+                        </li>
+                        <li>一度使ったことはあるが、ボイラープレート感が半端ではなかったため却下</li>
+                    </ul>
+                </li>
                 <li>
                     Recoil
                     <ul>
@@ -220,14 +273,11 @@ const KanColleQuestManager = (): JSX.Element => {
                                 <li>
                                     これに関してはデメリットでもあるので、以下のページを参考にして書き方を統一している
                                     <br />
-                                    <a
-                                        href="https://zenn.dev/warabi/articles/2521222d57a71f"
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                        className="link"
-                                    >
+                                    <ExternalLink href="https://zenn.dev/warabi/articles/2521222d57a71f">
                                         秩序あるRecoilの使い方を考える
-                                    </a>
+                                    </ExternalLink>
+                                    <br />
+                                    （少々ボイラープレート感はあるがReduxよりはマシということで）
                                 </li>
                             </ul>
                         </li>
@@ -243,24 +293,61 @@ const KanColleQuestManager = (): JSX.Element => {
                         <li>
                             まだメジャーバージョンが0番台のまま
                             <ul>
-                                <li>これに関しては何度か使用して特に大きな問題は見られないため良しとした</li>
+                                <li>これに関しては何度か使用した経験から特に大きな問題は見られないため良しとした</li>
                             </ul>
                         </li>
                     </ul>
                 </li>
                 <li>
-                    Redux
-                    <ul>
-                        <li>NOT IMPLEMENTED</li>
-                    </ul>
-                </li>
-                <li>
                     Jotai
                     <ul>
-                        <li>NOT IMPLEMENTED</li>
+                        <li>
+                            Recoilよりもシンプルに書ける
+                            <ul>
+                                <li>一方で込み入ったことをしようとするとシンプルではなくなる？</li>
+                            </ul>
+                        </li>
+                        <li>Recoilに比べてはっきり優位な点が見出せなかったので今回は見送り</li>
                     </ul>
                 </li>
             </ul>
+
+            <h3>ビルドツール</h3>
+            <p>
+                Viteを使い出してからSPAはこれ一択になってしまった…。とにかく速い！そして設定が比較的わかりやすい！
+                <br />
+                （設定に関してはViteがわかりやすいというよりはWebpackがクソわかりにくいだけとも言える）
+            </p>
+
+            <h2>開発時に苦労した点・工夫した点</h2>
+            <h3>検索性</h3>
+            <p>本アプリのコンセプト的に、以下に対する検索機能を付けたい。</p>
+            <ul>
+                <li>任務名称</li>
+                <li>任務達成でもらえるアイテム</li>
+                <li>
+                    前提任務（その任務を出現させるためにクリアすべき任務）や後続任務（その任務をクリアすることが出現のフラグになっている任務）
+                </li>
+            </ul>
+            <p>
+                任務名称と任務達成でもらえるアイテムの検索はテキストによるものなので、テキストボックスは必要。あとは前提任務・後続任務をどうするかだが、これもテキストボックスを使うこととした。
+                <br />
+                具体的にはプレフィクスを設け、それに続けて任務IDを入力することで対応した。例えば「p:A100」なら任務IDがA100の任務の前提任務をすべて表示する、といった具合である。
+                ただしプレフィクスを覚えて入力することを強制するのはユーザビリティが良くないので、各任務にボタンを割り当て、押せば自動的にテキストボックスに「p:A100」などと入力されるようにした。
+                <br />
+                これにより検索機能がすべてテキストボックスに集約されたので、Model側のロジックがすっきりできて良し。
+            </p>
+
+            <h3>前提任務・後続任務</h3>
+            <p>
+                先ほどから何度も話題に上がっている前提任務だが、2種類の検索を用意した。文字通り出現のフラグになっている任務を表示する「p:」プレフィクスと、その任務を出現させるためにクリアするべき全ての任務を表示する「a:」プレフィクスである。
+                <br />
+                後者に関してはデータを保持しているわけではなく、任務群を有向グラフと見立ててDFS（深さ優先探索）で探索をしている。DFSは再帰呼び出しで実装することが多いが、RecoilのSelectorで探索部を実装しておりSelectorの再帰呼び出しのオーバーヘッドがどれくらいのものかわからなかったので、
+                <CodeInline>Array</CodeInline>
+                をスタックに見立てて実装した。このあたり、AtCoderなどの競技プログラミングを触っていた経験が生きている。
+                <br />
+                ここまで前提任務について述べたが、後続任務に関しても全く同じである。（グラフの辺の向きを入れ替えただけ）
+            </p>
         </article>
     );
 };
