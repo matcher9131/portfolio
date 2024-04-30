@@ -1,9 +1,11 @@
 import { type Metadata } from "next";
+import LazySearch from "./_code/lazySearch";
 import PropsDestructure from "./_code/propsDestructure";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
 import CodeInline from "@/app/components/code/codeInline";
 import ExternalLink from "@/app/components/externalLink";
+import ColumnHeader from "./_code/columnHeader";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,
@@ -192,8 +194,8 @@ const KanColleQuestManager = (): JSX.Element => {
             <h4>Vue 3</h4>
             <p>
                 経験はあるしライブラリの選定にあまり時間をかけなくてよいメリットはあるが、<CodeInline>ref</CodeInline>や
-                <CodeInline>reactive</CodeInline>周りが煩わしいので（<CodeInline>.value</CodeInline>
-                があったりなかったり）却下。
+                <CodeInline>reactive</CodeInline>周りが直感的でなく煩わしい（<CodeInline>.value</CodeInline>
+                があったりなかったり）ので却下。
             </p>
 
             <h4>SolidJS</h4>
@@ -348,6 +350,59 @@ const KanColleQuestManager = (): JSX.Element => {
                 <br />
                 ここまで前提任務について述べたが、後続任務に関しても全く同じである。（グラフの辺の向きを入れ替えただけ）
             </p>
+
+            <h3>負荷軽減</h3>
+            <p>
+                検索機能をテキストボックスの値に結び付けた影響でキー入力のたびに検索が走って重くなったため、以下の対策を施した。
+            </p>
+
+            <h4>ページネーション</h4>
+            <p>
+                一度に表示する任務の量を少なくすれば勿論負荷軽減になるので、ページネーションを施した。
+                <br />
+                1ページあたりの表示件数は性能の低い端末を考えれば少ないほうがいいが、せっかく性能の高い端末を使っているのに1ページあたり20件では少なすぎてイライラする（※個人の感想です）ので、設定で20件・50件・100件・制限なしの4つから選べるようにした。
+            </p>
+
+            <h4>遅延反映</h4>
+            <p>
+                テキストボックスに表示するためのStateと、検索に用いるためのStateを分け、前者を遅延させて後者に反映させることで無駄な検索処理が走らないようにした。具体的には以下の通り。
+            </p>
+            <LazySearch />
+
+            <h3>レスポンシブデザイン</h3>
+            <p>
+                検索結果は<CodeInline>{"<table>"}</CodeInline>で返し、セマンティクスも意識して1つの任務を1つの
+                <CodeInline>{"<tr>"}</CodeInline>
+                で表していため、このままでは横幅の狭い端末で見るとはみ出してしまう。
+                <br />
+                本アプリはPCでの利用を想定しているものの、このご時世にスマホで見たら横にはみ出すのは流石にダサい。
+                <br />
+                よって一定の横幅以下の場合は<CodeInline>{"<tr>"}</CodeInline>
+                にCSSグリッドレイアウトを適用し、1行で表示していたものを複数行に分けた。
+                <br />
+                ただし、1行で表示している場合と異なり列ヘッダを表示する必要があるため、カスタムデータ属性・before疑似要素・
+                <CodeInline>attr</CodeInline>関数の組み合わせでなんとかする。
+            </p>
+            <ColumnHeader />
+
+            <h3>ヘルプページ</h3>
+            <p>
+                前提任務・後続任務など少々ややこしいところもあるので画像付きで説明を付けたかったが、前述の通りレスポンシブデザインでデバイスの幅が広いときと狭いときの表示にそこそこ差がある。そのため、それだったらむしろ実際のコンポーネントを置いたほうがいいのではないかと考えた。
+                <br />
+                ただし本当にそのままコンポーネントを置くと保存データに影響を及ぼしてしまうので、コンテナ・プレゼンテーションパターンで関心の分離を行ったうえでモックを作成する。
+                <br />
+                具体的には検索結果の任務1つを表すコンポーネントを、プレゼンテーションのみを扱う
+                <CodeInline>QuestTableRow</CodeInline>とロジック部分を扱うカスタムフック
+                <CodeInline>useQuestTableRow</CodeInline>に分け、ヘルプページでは<CodeInline>QuestTableRow</CodeInline>
+                を包含してモックを作った。
+                <br />
+                これによりレスポンシブデザインを反映できるだけではなく、実際に操作してどうなるかが確認できるサンプルが表示されることになるため、ユーザビリティを高めることにもなった。
+                <br />
+                （実際にどのくらいのユーザーがヘルプページをきちんと読むかどうかという問題はあるが…）
+            </p>
+
+            <h3>スクレイピング</h3>
+            <p>NOT IMPLEMENTED</p>
         </article>
     );
 };

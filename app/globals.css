@@ -27,13 +27,13 @@
         @apply my-5 border-b-[1px] border-b-neutral-content text-3xl font-black leading-10;
     }
     h2 {
-        @apply mb-2 mt-7 text-2xl font-extrabold;
+        @apply mb-2 mt-7 text-3xl font-extrabold;
     }
     h3 {
-        @apply mb-2 mt-5 text-xl font-bold;
+        @apply mb-2 mt-5 text-2xl font-bold;
     }
     h4 {
-        @apply mb-1 mt-3 text-lg font-bold;
+        @apply mb-1 mt-3 text-xl font-bold;
     }
     p {
         @apply my-1 leading-8;
