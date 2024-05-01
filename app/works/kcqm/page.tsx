@@ -1,11 +1,13 @@
 import { type Metadata } from "next";
+import AtomMock from "./_code/atomMock";
+import AtomMockUsage from "./_code/atomMockUsage";
+import ColumnHeader from "./_code/columnHeader";
 import LazySearch from "./_code/lazySearch";
 import PropsDestructure from "./_code/propsDestructure";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
 import CodeInline from "@/app/components/code/codeInline";
 import ExternalLink from "@/app/components/externalLink";
-import ColumnHeader from "./_code/columnHeader";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,
@@ -42,7 +44,7 @@ const KanColleQuestManager = (): JSX.Element => {
 
             <h2>動作推奨環境</h2>
             <ul>
-                <li>端末：PC</li>
+                <li>端末：PC、スマホ</li>
                 <li>ブラウザ：Google Chrome、Microsoft Edge、Firefox 各最新版</li>
             </ul>
 
@@ -174,7 +176,8 @@ const KanColleQuestManager = (): JSX.Element => {
                     <ul>
                         <li>
                             実行してからはじめて<CodeInline>TypeError: Cannot read properties of undefined</CodeInline>
-                            やら<CodeInline>TypeError: foo is not a function</CodeInline>やら言われても…
+                            やら<CodeInline>TypeError: foo is not a function</CodeInline>
+                            やら言われるよりIDEがエラーを示してくれたほうが遥かに手っ取り早い
                         </li>
                     </ul>
                 </li>
@@ -401,8 +404,39 @@ const KanColleQuestManager = (): JSX.Element => {
                 （実際にどのくらいのユーザーがヘルプページをきちんと読むかどうかという問題はあるが…）
             </p>
 
-            <h3>スクレイピング</h3>
-            <p>NOT IMPLEMENTED</p>
+            <h3>テスタビリティの確保</h3>
+            <p>
+                上でもちらっと述べたが、ほとんどのコンポーネントにおいてコンテナ・プレゼンテーションパターンで関心の分離を行うことにより、テスタビリティを確保することを意識した。これにより任務データをモックデータとして与えることで多少込み入った検索や「前提任務をすべて達成済にする」ボタンなどの挙動のテストがかなり楽に行えるようになった。
+            </p>
+
+            <h3>テスト</h3>
+            <h4>Recoil Atomのオブザーバー</h4>
+            <p>
+                Atomの値の変化を見たいときは Recoil公式ドキュメントの
+                <ExternalLink href="https://recoiljs.org/docs/guides/testing">Testing</ExternalLink>ページに書いてある
+                <CodeInline>RecoilObserver</CodeInline>
+                を実装して使えばOK。これは本当に便利。
+            </p>
+
+            <h4>Recoil Atomのモック</h4>
+            <p>
+                Vitestにファイル単位での置き換えを行う<CodeInline>mock</CodeInline>
+                メソッドがあるのでそれを使えばOK、と思いきや
+                <br />
+                <CodeInline>mock</CodeInline>
+                メソッドは巻き上げられるため、同じテストファイル内に2つ以上同一ファイルへのモックを書くと、前のものが後のもので上書きされてテストが通らなくなる。
+                <br />
+                一方でDynamic Importが必要になるものの<CodeInline>doMock</CodeInline>
+                メソッドは巻き上げは起こらないので、こちらを使う方針で。
+                <br />
+                毎度同じ文言を書くのは芸がないので、以下のヘルパー関数を用意する。
+            </p>
+            <AtomMock />
+            <p>
+                Atomの宣言時に変数名と<CodeInline>key</CodeInline>
+                を一致させていないと使えないヘルパーだが、以下のように書けて便利。
+            </p>
+            <AtomMockUsage />
         </article>
     );
 };
