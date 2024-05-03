@@ -113,21 +113,8 @@ const NumericUpDown = (): JSX.Element => {
             <CodeRow></CodeRow>
             <CodeRow indent={1}>
                 <CodeStatement>if</CodeStatement>{" ("}
-                    <CodeParameter>textbox</CodeParameter>{"."}<CodeProperty>Text</CodeProperty>{" == "}<CodeStringLiteral>{`"-"`}</CodeStringLiteral>
-                {") "}
-            </CodeRow>
-            <CodeRow indent={1}>{"{"}</CodeRow>
-            <CodeRow indent={2}>
-                <CodeComment>{"// マイナス記号のみの状態でフォーカスが外れた場合は暫定的に0を入れる（この挙動は要検討）"}</CodeComment>
-            </CodeRow>
-            <CodeRow indent={2}>
-                <CodeParameter>textbox</CodeParameter>{"."}<CodeProperty>Text</CodeProperty>{" = "}<CodeStringLiteral>{`"0"`}</CodeStringLiteral>
-            </CodeRow>
-            <CodeRow indent={1}>{"}"}</CodeRow>
-            <CodeRow indent={1}>
-                <CodeStatement>else</CodeStatement>{" "}<CodeStatement>if</CodeStatement>{" ("}
                     <CodeKeyword>int</CodeKeyword>{"."}<CodeFunction>TryParse</CodeFunction>{"("}
-                        <CodeParameter>textbox</CodeParameter>{"."}<CodeProperty>Text</CodeProperty>{", "}
+                        <CodeVariable>textbox</CodeVariable>{"."}<CodeProperty>Text</CodeProperty>{", "}
                         <CodeKeyword>out</CodeKeyword>{" "}<CodeKeyword>int</CodeKeyword>{" "}<CodeVariable>value</CodeVariable>
                     {")"}
                 {")"}
@@ -140,7 +127,27 @@ const NumericUpDown = (): JSX.Element => {
                 <CodeComment>{"// 入力された状態でフォーカスを失った場合は、文字列をフォーマルなものにする"}</CodeComment>
             </CodeRow>
             <CodeRow indent={2}>
-                <CodeParameter>textbox</CodeParameter>{"."}<CodeProperty>Text</CodeProperty>{" = "}<CodeVariable>value</CodeVariable>{"."}<CodeFunction>ToString</CodeFunction>{"();"}
+                <CodeVariable>textbox</CodeVariable>{"."}<CodeProperty>Text</CodeProperty>{" = "}<CodeVariable>value</CodeVariable>{"."}<CodeFunction>ToString</CodeFunction>{"();"}
+            </CodeRow>
+            <CodeRow indent={1}>{"}"}</CodeRow>
+            <CodeRow indent={1}>
+                <CodeStatement>else</CodeStatement>
+            </CodeRow>
+            <CodeRow indent={1}>{"{"}</CodeRow>
+            <CodeRow indent={2}>
+                <CodeComment>{"// PreviewTextInputメソッドでは入力途中に発生する「空白」や「マイナス記号のみ」の"}</CodeComment>
+            </CodeRow>
+            <CodeRow indent={2}>
+                <CodeComment>{"// 文字列も通すようにしているので、その状態（あるいは何らかの原因で10進整数として"}</CodeComment>
+            </CodeRow>
+            <CodeRow indent={2}>
+                <CodeComment>{"// 解釈できない文字列が入力された状態）でフォーカスを失った時にゼロを突っ込んでおく"}</CodeComment>
+            </CodeRow>
+            <CodeRow indent={2}>
+                <CodeComment>{"// （ここには書いていないがPropertyChangedCallbackにより適切な値に強制される）"}</CodeComment>
+            </CodeRow>
+            <CodeRow indent={2}>
+                <CodeVariable>textbox</CodeVariable>{"."}<CodeProperty>Text</CodeProperty>{" = "}<CodeStringLiteral>{`"0"`}</CodeStringLiteral>{";"}
             </CodeRow>
             <CodeRow indent={1}>{"}"}</CodeRow>
             <CodeRow>{"}"}</CodeRow>

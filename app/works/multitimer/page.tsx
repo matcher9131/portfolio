@@ -91,13 +91,13 @@ const MultiTimer = (): JSX.Element => {
                 <p>
                     かつてのスタンダードであるWindows
                     Formsには数値のみを受け付けるテキストボックスと数値を増減できるスピンボタンがついた
-                    <CodeInline>NumericUpDown</CodeInline>コントロールがあるが、WPFにはなぜか存在しない。
+                    <CodeInline>NumericUpDown</CodeInline>コントロールがあるが、なぜかWPFには存在しない。
                     <br />
                     勿論公式ライブラリに存在しないだけでサードパーティーには存在するのだが、私がかつて愛用していたExtended
                     WPF Toolkitは.NET 5.0までの対応で細々としかメンテされていない。（試したところ.NET
                     8.0でも使えるようだが不安が残る）
                     <br />
-                    他のものを試すにしてもカスタマイズ性（整数のみの入力が可能かどうか、最大値最小値を指定できるかどうか、Bindingがきちんとできるかどうかetc）を確認する暇があれば自作できるのではないかと考え、自分で作ることにした。
+                    他のものを試すにしてもカスタマイズ性（整数のみの入力が可能かどうか、最小値・最大値を指定できるかどうか、Bindingがきちんとできるかどうかetc）を確認する暇があれば自作できるのではないかと考え、自分で作ることにした。
                 </p>
 
                 <h4>数値のみを受け付けるテキストボックス</h4>
@@ -113,8 +113,39 @@ const MultiTimer = (): JSX.Element => {
                 </p>
                 <NumericUpDown />
 
-                <h4>バグか仕様かよくわからない謎の挙動</h4>
-                <p>NOT IMPLEMENTED</p>
+                <h4>名ばかりのCoerce</h4>
+                <p>
+                    <CodeInline>NumericUpDown</CodeInline>
+                    コントロールは受け付ける値の最小値・最大値を設定できる（かついつでも変更できる）ので、現在の値・最小値・最大値の整合性を自動的にとれるようにしておく必要がある。
+                    <br />
+                    なんとMicrosoft公式が直々に
+                    <ExternalLink href="https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/properties/dependency-property-callbacks-and-validation?view=netdesktop-8.0">
+                        依存関係プロパティのコールバックと検証 (WPF .NET)
+                    </ExternalLink>
+                    でこのケースと全く同じ例を挙げてくれているので、それに基づいて
+                    <CodeInline>CoerceValueCallback</CodeInline>を実装したのだが…
+                </p>
+                <p>
+                    <strong>普通に現在の値が最小値を貫通するぞ…？</strong>
+                </p>
+                <p>
+                    調べてみると
+                    <ExternalLink href="http://var.blog.jp/archives/67898237.html">
+                        DepdencyProperty の CoerceValueCallback が Binding ソースに反映されない
+                    </ExternalLink>
+                    に以下の記載があった。
+                </p>
+                <blockquote cite="http://var.blog.jp/archives/67898237.html" className="rounded bg-neutral p-4">
+                    CoerceValueCallback で値変えても Binding ソースは変える前の値で更新される
+                </blockquote>
+                <p>
+                    <b>控えめに言ってバグじゃねーか！</b>
+                    <br />
+                    万一仕様だとしてもこれは仕様バグと言わざるを得ない。何のためのCoerce（強制）なのか…
+                    <br />
+                    まぁ上述のページにあるとおり<CodeInline>CoerceValueCallback</CodeInline>
+                    を使わなければ良いだけの話ではあるので、その方針で実装した。
+                </p>
 
                 <h3>内部タイマーの選択とテスタビリティの確保</h3>
                 <h4>
