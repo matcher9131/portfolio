@@ -20,7 +20,7 @@ const SkillGroup = ({ groupName, skills, isWide }: SkillGroupItem): JSX.Element 
 
     return (
         <section className={classes("mx-auto", isWide && "md:col-span-2")}>
-            <h2 className="text-center">{groupName}</h2>
+            <h2 className="no-decoration text-center">{groupName}</h2>
             <table className={classes("grid", isWide && "md:grid-cols-2")}>
                 <tbody className="contents">
                     {skills.map(({ name, value }) => (
