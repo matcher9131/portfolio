@@ -29,7 +29,7 @@ const Works = (): JSX.Element => {
                     >
                         <figure>ここに画像</figure>
                         <div className="card-body">
-                            <h2>{page.name}</h2>
+                            <h2 className="no-decoration">{page.name}</h2>
                             <p>{page.description}</p>
                         </div>
                     </TransitionLink>
