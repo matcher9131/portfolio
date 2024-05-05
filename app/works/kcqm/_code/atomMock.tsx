@@ -1,5 +1,6 @@
 import CodeBlock from "@/app/components/code/codeBlock";
 import CodeGenerics from "@/app/components/code/codeGenerics";
+import CodeComment from "@/app/components/code/codeHighlight/codeComment";
 import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
 import CodeKeyword from "@/app/components/code/codeHighlight/codeKeyword";
 import CodeParameter from "@/app/components/code/codeHighlight/codeParameter";
@@ -12,6 +13,9 @@ const AtomMock = (): JSX.Element => {
     // prettier-ignore
     return (
         <CodeBlock language="TypeScript">
+            <CodeRow>
+                <CodeComment>{"// 戻り値の型はpropsの各プロパティの型をRecoilStateで包んだもの"}</CodeComment>
+            </CodeRow>
             <CodeRow>
                 <CodeStatement>export</CodeStatement>{" "}
                 <CodeKeyword>const</CodeKeyword>{" "}

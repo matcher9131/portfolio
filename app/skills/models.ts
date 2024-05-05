@@ -33,7 +33,7 @@ export const skillDictionary: SkillGroupItem[] = [
             { name: "styled-components", value: 5 },
             { name: "WPF", value: 5 },
             { name: "Reactive Property", value: 5 },
-            { name: "Recoil", value: 4 },
+            { name: "Recoil", value: 5 },
             { name: "Vue.js", value: 4 },
             { name: "Next.js", value: 4 },
             { name: "Flutter", value: 3 },
@@ -42,8 +42,8 @@ export const skillDictionary: SkillGroupItem[] = [
     {
         groupName: "Environments / Tools",
         skills: [
-            { name: "Node.js", value: 5 },
             { name: "Deno", value: 5 },
+            { name: "Node.js", value: 4 },
             { name: "Git / GitHub", value: 4 },
             { name: "Vite", value: 4 },
             { name: "ESLint", value: 4 },

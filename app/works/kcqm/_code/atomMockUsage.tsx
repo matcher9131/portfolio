@@ -15,7 +15,7 @@ const AtomMockUsage = (): JSX.Element => {
                 <CodeStringLiteral>{`"@/models/quest/atom"`}</CodeStringLiteral>{", {"}
             </CodeRow>
             <CodeRow indent={1}>
-                <CodeComment>{"// プロパティ名は置き換え元ファイルでexportしている変数の宣言名、値は置き換える内容"}</CodeComment>
+                <CodeComment>{"// プロパティ名は置き換え元ファイルでexportしている変数名、値は置き換える内容"}</CodeComment>
             </CodeRow>
             <CodeRow indent={1}>
                 <CodeProperty>questsAtom</CodeProperty>{": "}<CodeComment>{"/* 省略 */"}</CodeComment>

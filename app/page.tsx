@@ -1,21 +1,11 @@
 "use client";
 
-import { Cormorant_Garamond } from "next/font/google";
 import { useEffect, useRef } from "react";
 import { siteTitle } from "./_shared/const";
+import { cormorantGaramond } from "./_shared/fonts";
 import { getChildPages } from "./_shared/pageProperties";
 import { TransitionLink } from "./components/pageTransition/transitionLink";
 import { classes } from "./util/classes";
-
-const titleFont = Cormorant_Garamond({
-    weight: "700",
-    subsets: ["latin"],
-});
-
-const contentFont = Cormorant_Garamond({
-    weight: "500",
-    subsets: ["latin"],
-});
 
 const Home = (): JSX.Element => {
     const itemsRef = useRef<Map<string, HTMLElement>>();
@@ -65,11 +55,18 @@ const Home = (): JSX.Element => {
                         map.delete("/");
                     };
                 }}
-                className={classes(titleFont.className, "w-full", "text-6xl", "text-center", "border-none", "py-40")}
+                className={classes(
+                    cormorantGaramond.className,
+                    "w-full",
+                    "text-6xl",
+                    "text-center",
+                    "border-none",
+                    "py-40",
+                )}
             >
                 {siteTitle}
             </h1>
-            <ul className="mx-0 flex w-full max-w-screen-lg list-none justify-around px-0">
+            <ul className="mx-0 flex w-full max-w-screen-lg list-none justify-around px-0 font-bold">
                 {getChildPages().map(({ name, path }) => (
                     <li
                         key={path}
@@ -86,7 +83,8 @@ const Home = (): JSX.Element => {
                         <TransitionLink
                             href={path}
                             className={classes(
-                                contentFont.className,
+                                cormorantGaramond.className,
+                                "font-medium",
                                 "relative",
                                 "inline-block",
                                 "text-3xl",
