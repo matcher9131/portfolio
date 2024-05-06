@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { classes } from "../util/classes";
+import { classes } from "../_util/classes";
 
 type RootContainerProps = {
     readonly children: ReactNode;

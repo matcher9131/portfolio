@@ -1,12 +1,12 @@
-import CodeBlock from "@/app/components/code/codeBlock";
-import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
-import CodeKeyword from "@/app/components/code/codeHighlight/codeKeyword";
-import CodeParameter from "@/app/components/code/codeHighlight/codeParameter";
-import CodeStatement from "@/app/components/code/codeHighlight/codeStatement";
-import CodeType from "@/app/components/code/codeHighlight/codeType";
-import CodeVariable from "@/app/components/code/codeHighlight/codeVariable";
-import CodeReactComponentAttribute from "@/app/components/code/codeReactComponentAttribute";
-import CodeRow from "@/app/components/code/codeRow";
+import CodeBlock from "@/app/_components/code/codeBlock";
+import CodeFunction from "@/app/_components/code/codeHighlight/codeFunction";
+import CodeKeyword from "@/app/_components/code/codeHighlight/codeKeyword";
+import CodeParameter from "@/app/_components/code/codeHighlight/codeParameter";
+import CodeStatement from "@/app/_components/code/codeHighlight/codeStatement";
+import CodeType from "@/app/_components/code/codeHighlight/codeType";
+import CodeVariable from "@/app/_components/code/codeHighlight/codeVariable";
+import CodeReactComponentAttribute from "@/app/_components/code/codeReactComponentAttribute";
+import CodeRow from "@/app/_components/code/codeRow";
 
 const TransitionLinkAfter = (): JSX.Element => {
     // prettier-ignore

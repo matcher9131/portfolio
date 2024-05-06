@@ -1,9 +1,9 @@
 import { type Metadata } from "next";
 import NumericUpDown from "./_codes/numericUpdown";
 import { pageProperties } from "./properties";
+import CodeInline from "@/app/_components/code/codeInline";
+import ExternalLink from "@/app/_components/externalLink";
 import { siteTitle } from "@/app/_shared/const";
-import CodeInline from "@/app/components/code/codeInline";
-import ExternalLink from "@/app/components/externalLink";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,

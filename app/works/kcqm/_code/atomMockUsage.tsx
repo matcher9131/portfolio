@@ -1,10 +1,10 @@
-import CodeBlock from "@/app/components/code/codeBlock";
-import CodeComment from "@/app/components/code/codeHighlight/codeComment";
-import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
-import CodeProperty from "@/app/components/code/codeHighlight/codeProperty";
-import CodeStatement from "@/app/components/code/codeHighlight/codeStatement";
-import CodeStringLiteral from "@/app/components/code/codeHighlight/codeStringLiteral";
-import CodeRow from "@/app/components/code/codeRow";
+import CodeBlock from "@/app/_components/code/codeBlock";
+import CodeComment from "@/app/_components/code/codeHighlight/codeComment";
+import CodeFunction from "@/app/_components/code/codeHighlight/codeFunction";
+import CodeProperty from "@/app/_components/code/codeHighlight/codeProperty";
+import CodeStatement from "@/app/_components/code/codeHighlight/codeStatement";
+import CodeStringLiteral from "@/app/_components/code/codeHighlight/codeStringLiteral";
+import CodeRow from "@/app/_components/code/codeRow";
 
 const AtomMockUsage = (): JSX.Element => {
     // prettier-ignore

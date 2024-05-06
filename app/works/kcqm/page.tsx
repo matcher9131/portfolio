@@ -5,9 +5,9 @@ import ColumnHeader from "./_code/columnHeader";
 import LazySearch from "./_code/lazySearch";
 import PropsDestructure from "./_code/propsDestructure";
 import { pageProperties } from "./properties";
+import CodeInline from "@/app/_components/code/codeInline";
+import ExternalLink from "@/app/_components/externalLink";
 import { siteTitle } from "@/app/_shared/const";
-import CodeInline from "@/app/components/code/codeInline";
-import ExternalLink from "@/app/components/externalLink";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,

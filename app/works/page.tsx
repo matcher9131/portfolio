@@ -1,6 +1,6 @@
 import { type Metadata } from "next";
+import { TransitionLink } from "../_components/pageTransition/transitionLink";
 import { getWorksPages } from "../_shared/pageProperties";
-import { TransitionLink } from "../components/pageTransition/transitionLink";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
 

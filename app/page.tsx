@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { TransitionLink } from "./_components/pageTransition/transitionLink";
 import { siteTitle } from "./_shared/const";
 import { cormorantGaramond } from "./_shared/fonts";
 import { getChildPages } from "./_shared/pageProperties";
-import { TransitionLink } from "./components/pageTransition/transitionLink";
-import { classes } from "./util/classes";
+import { classes } from "./_util/classes";
 
 const Home = (): JSX.Element => {
     const itemsRef = useRef<Map<string, HTMLElement>>();

@@ -1,14 +1,14 @@
 import { type Metadata } from "next";
 import { pageProperties } from "./properties";
+import CodeBlock from "@/app/_components/code/codeBlock";
+import CodeFunction from "@/app/_components/code/codeHighlight/codeFunction";
+import CodeParameter from "@/app/_components/code/codeHighlight/codeParameter";
+import CodeProperty from "@/app/_components/code/codeHighlight/codeProperty";
+import CodeType from "@/app/_components/code/codeHighlight/codeType";
+import CodeIndent from "@/app/_components/code/codeIndent";
+import CodeInline from "@/app/_components/code/codeInline";
 import { siteTitle } from "@/app/_shared/const";
-import CodeBlock from "@/app/components/code/codeBlock";
-import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
-import CodeParameter from "@/app/components/code/codeHighlight/codeParameter";
-import CodeProperty from "@/app/components/code/codeHighlight/codeProperty";
-import CodeType from "@/app/components/code/codeHighlight/codeType";
-import CodeIndent from "@/app/components/code/codeIndent";
-import CodeInline from "@/app/components/code/codeInline";
-import { classes } from "@/app/util/classes";
+import { classes } from "@/app/_util/classes";
 
 const CodeItemsBefore = (): JSX.Element => {
     // prettier-ignore

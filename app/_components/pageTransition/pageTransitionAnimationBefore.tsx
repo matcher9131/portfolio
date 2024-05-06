@@ -3,7 +3,7 @@
 import { forwardRef } from "react";
 import { useRecoilValue } from "recoil";
 import { backgroundRefStates, starRefStates } from "./states";
-import { classes } from "@/app/util/classes";
+import { classes } from "@/app/_util/classes";
 
 // eslint-disable-next-line react/display-name
 const Star = forwardRef<SVGSVGElement>((_, ref): JSX.Element => {

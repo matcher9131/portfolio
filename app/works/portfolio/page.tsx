@@ -5,8 +5,8 @@ import TemplateEffect from "./_codes/templateEffect";
 import TransitionLinkAfter from "./_codes/transitionLinkAfter";
 import TransitionLinkBefore from "./_codes/transitionLinkBefore";
 import TransitionLinkTypeDeclaration from "./_codes/transitionLinkTypeDeclaration";
-import CodeBlock from "@/app/components/code/codeBlock";
-import CodeInline from "@/app/components/code/codeInline";
+import CodeBlock from "@/app/_components/code/codeBlock";
+import CodeInline from "@/app/_components/code/codeInline";
 
 const Portfolio = (): JSX.Element => {
     return (

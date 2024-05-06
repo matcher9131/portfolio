@@ -1,9 +1,9 @@
-import CodeBlock from "@/app/components/code/codeBlock";
-import CodeComment from "@/app/components/code/codeHighlight/codeComment";
-import CodeProperty from "@/app/components/code/codeHighlight/codeProperty";
-import CodeStringLiteral from "@/app/components/code/codeHighlight/codeStringLiteral";
-import CodeVariable from "@/app/components/code/codeHighlight/codeVariable";
-import CodeRow from "@/app/components/code/codeRow";
+import CodeBlock from "@/app/_components/code/codeBlock";
+import CodeComment from "@/app/_components/code/codeHighlight/codeComment";
+import CodeProperty from "@/app/_components/code/codeHighlight/codeProperty";
+import CodeStringLiteral from "@/app/_components/code/codeHighlight/codeStringLiteral";
+import CodeVariable from "@/app/_components/code/codeHighlight/codeVariable";
+import CodeRow from "@/app/_components/code/codeRow";
 
 const ColumnHeader = (): JSX.Element => {
     // prettier-ignore

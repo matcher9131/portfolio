@@ -1,5 +1,5 @@
 import { useRecoilValue } from "recoil";
-import { classes } from "../util/classes";
+import { classes } from "../_util/classes";
 import { type SkillGroupItem } from "./models";
 import { skillStarsRefState } from "./states";
 
