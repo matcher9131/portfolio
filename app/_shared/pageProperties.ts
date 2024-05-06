@@ -1,3 +1,4 @@
+import { pageProperties as profilePageProperties } from "../profile/properties";
 import { pageProperties as skillPageProperties } from "../skills/properties";
 import { pageProperties as kcqmPageProperties } from "../works/kcqm/properties";
 import { pageProperties as multiTimerPageProperties } from "../works/multitimer/properties";
@@ -16,6 +17,7 @@ const pageProperties: readonly PageProperty[] = [
         path: "/",
         name: "Home",
     },
+    profilePageProperties,
     worksPageProperties,
     kcqmPageProperties,
     multiTimerPageProperties,
