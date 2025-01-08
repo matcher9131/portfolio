@@ -75,12 +75,12 @@ const Portfolio = (): JSX.Element => {
             <h2>開発時に苦労した点・工夫した点</h2>
             <h3>ページ遷移アニメーション</h3>
             <p>
-                ポートフォリオには個性が必要だ、ということでちょっと凝ったページ遷移アニメーションを実装しようと考えた。それが「多数の星が流れてきてページの内容を消していく」というものである。
+                どうせならあまり検索でひっかからないタイプのページ遷移アニメーションを実装しようと考えた。それが「多数の星が流れてきてページの内容を消していく」というものである。
                 <br />
                 これを実現するために使える技術を選定していく。
             </p>
 
-            <h4>ページ遷移後のアニメーションの技術選定</h4>
+            <h4>ページ遷移前アニメーションの技術選定</h4>
             <ul>
                 <li>
                     View Transitions API
@@ -208,11 +208,11 @@ const Portfolio = (): JSX.Element => {
             <p>
                 先述のカスタムフック<CodeInline>usePageTransitionAnimation</CodeInline>
                 にページ遷移後のアニメーションを行うメソッド
-                <CodeInline>animateBeforeTransition</CodeInline>
+                <CodeInline>animateAfterTransition</CodeInline>
                 を実装し、これを然るべきところでimportして使う。
                 <br />
                 その然るべき場所というのは<CodeInline>template</CodeInline>である。<CodeInline>useEffect</CodeInline>
-                でURLの変化を検知し、そこに<CodeInline>animateBeforeTransition</CodeInline>を仕込む。
+                でURLの変化を検知し、そこに<CodeInline>animateAfterTransition</CodeInline>を仕込む。
             </p>
             <TemplateEffect />
         </article>

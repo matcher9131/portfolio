@@ -106,6 +106,6 @@ const factories: KeyframesFactory[] = [
     },
 ];
 
-export const getKeyframesFactory = (randomNumbers: number): KeyframesFactory => {
-    return { ...factories[Math.floor(randomNumbers * 3)] };
+export const getKeyframesFactory = (randomNumber: number): KeyframesFactory => {
+    return { ...factories[Math.floor(randomNumber * 3)] };
 };
