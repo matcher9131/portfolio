@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
+import CodeInline from "@/app/_components/code/codeInline";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,
@@ -83,6 +84,36 @@ const Bill = (): JSX.Element => {
             <p>
                 前の職場で月謝制で口座振替によりお客様から代金をいただいていたが、口座振替の申請が始まるまでの初回請求書をエクセルでほぼ手作業で作っていたため、時間がかかる上にヒューマンエラーもあった。
                 これを解消するために会社に許可を得たうえで自作ツールで請求書を出力することにした。
+            </p>
+
+            <h2>使用技術の選定理由</h2>
+            <p>検討したのは以下の3つ。</p>
+            <ul>
+                <li>クライアントアプリでPDFを作成する</li>
+                <li>クライアントアプリでXAMLを作成する</li>
+                <li>Webアプリ</li>
+            </ul>
+            <h3>クライアントアプリでPDFを作成する</h3>
+            <p>
+                PDF作成ライブラリはいろいろとあるが、基本的には普通の文書を書くためのものか、あるいは自由なレイアウトを実現できる代わりに
+                何から何までこちらから指定しなければならないもののどちらかであることがほとんどである。
+                <br />
+                前者はテーブル主体のレイアウトに向かないし、後者は流石に労力が多すぎるので却下。
+                <br />
+                なおHTMLやMarkdownをPDFに変換するライブラリもあったが、HTMLをわざわざPDFに変換するくらいなら初めからWebアプリで良いと考えた。
+            </p>
+            <h3>クライアントアプリでXAMLを作成する</h3>
+            <p>
+                XAMLのレイアウトシステムのおかげでPDFのような地獄にはならなさそうだが、もともと印刷されることを想定したフォーマットではないためそのあたりがやや面倒である。
+                （<CodeInline>FixedDocument</CodeInline>内の<CodeInline>PageContent</CodeInline>内の
+                <CodeInline>FixedPage</CodeInline>内の<CodeInline>ContentPresenter</CodeInline>
+                内に要素を入れる必要がある、など）
+            </p>
+            <h3>Webアプリ</h3>
+            <p>
+                新たに印刷用ページを作成しなくとも、メディアクエリを用いて通常時と印刷時で内容を変えるようにすれば良さげ。
+                <br />
+                デプロイすると商品内容が筒抜けになってしまう可能性がわずかながら存在するので、必要なときのみローカルサーバーを立てて使う運用にした。（どうせ自分しか使わないし…）
             </p>
         </article>
     );
