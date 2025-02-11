@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 import { pageProperties } from "./properties";
-import { siteTitle } from "@/app/_shared/const";
 import CodeInline from "@/app/_components/code/codeInline";
+import { siteTitle } from "@/app/_shared/const";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,
@@ -21,6 +21,16 @@ const Bill = (): JSX.Element => {
                 src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131/initial-bill"
                 className="w-full max-w-screen-sm"
             ></iframe>
+
+            <h2>デプロイ例</h2>
+            <iframe
+                title="Initial Bill"
+                src="https://hatenablog-parts.com/embed?url=https://initial-bill-sample-x8jd7w09.web.app/"
+                className="w-full max-w-screen-sm"
+            ></iframe>
+            <p>
+                <strong>※メールアドレス「bill@example.com」、パスワード「initial」でログインしてください。</strong>
+            </p>
 
             <h2>機能</h2>
             <ul>
@@ -83,7 +93,7 @@ const Bill = (): JSX.Element => {
             <h2>このアプリを作ったきっかけ</h2>
             <p>
                 前の職場で月謝制で口座振替によりお客様から代金をいただいていたが、口座振替の申請が始まるまでの初回請求書をエクセルでほぼ手作業で作っていたため、時間がかかる上にヒューマンエラーもあった。
-                これを解消するために会社に許可を得たうえで自作ツールで請求書を出力することにした。
+                これを解消するために会社に許可を得たうえで自作アプリで請求書を出力することにした。
             </p>
 
             <h2>使用技術の選定理由</h2>
@@ -113,7 +123,47 @@ const Bill = (): JSX.Element => {
             <p>
                 新たに印刷用ページを作成しなくとも、メディアクエリを用いて通常時と印刷時で内容を変えるようにすれば良さげ。
                 <br />
-                デプロイすると商品内容が筒抜けになってしまう可能性がわずかながら存在するので、必要なときのみローカルサーバーを立てて使う運用にした。（どうせ自分しか使わないし…）
+                セキュリティ面を考慮し、ログイン機能を実装したうえで使うときのみローカルサーバーを立てて運用することにした。
+            </p>
+
+            <h2>開発時に苦労した点・工夫した点</h2>
+            <h3>入力された日付の取り扱い</h3>
+            <p>日付に関して、以下の2点をアプリの仕様とした。</p>
+            <ul>
+                <li>
+                    入力には<CodeInline>{'<input type="date">'}</CodeInline>を用いる。
+                </li>
+                <li>存在しない日付が入力されている場合は、矯正せずにエラー表示をする。</li>
+            </ul>
+            <p>
+                <CodeInline>{'<input type="date">'}</CodeInline>
+                はカレンダーによる日付入力もできるため日付選択のフォームとしては有能だが、
+                直接入力の際は「月」に入力された数値が1以上12以下に、「日」に入力された数値が1以上31以下に矯正される程度の機能しか持たない。
+                すなわち、<CodeInline>2025/01/32</CodeInline>や<CodeInline>2025/13/01</CodeInline>
+                のような入力はできないが、<CodeInline>2025/04/31</CodeInline>や<CodeInline>2025/02/29</CodeInline>
+                のような入力はそのまま通ってしまう。 <br />
+                ただし<CodeInline>change</CodeInline>
+                イベントの際に入力が存在しない日付になる場合は<CodeInline>value</CodeInline>として
+                空文字列が返されるため、そこでエラー表示をするかどうかの判断をすることができる。
+            </p>
+
+            <h3>ページ遷移や待ち時間なしで印刷画面へ</h3>
+            <p>
+                アプリ本体の画面を印刷する必要はないため、1ページ内にアプリ本体と請求書部分の双方を仕込んでおき、通常時はアプリ本体のみ表示、印刷時は請求書部分のみ表示させることで待ち時間無しで印刷画面へ移行できるようにした。
+            </p>
+
+            <h3>ページネーション</h3>
+            <p>
+                もちろんブラウザ側がページレイアウトをしてくれるのだが、そのままだと中途半端なところで改ページされる可能性があるし、そもそも請求書なら続きがあることを明示したほうがよいため、請求書の行数が一定値を超える場合に改ページを行うことにした。
+                <br />
+                商品数から言えば3ページ以上になることはまず無いのだが、念の為「単体ページ」「先頭ページ」「中間ページ」「最終ページ」の4つのフォーマットを使い分ける形にしている。
+            </p>
+
+            <h3>ログイン</h3>
+            <p>
+                デプロイ先をFirebaseとし、Firebaseの認証機能を用いてログイン機能を実装した。
+                <br />
+                使い方からしてGoogleアカウントなどでログインできる必要はないと判断し、指定したメールアドレスとパスワードのみを許可するようにした。
             </p>
         </article>
     );
