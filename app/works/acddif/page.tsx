@@ -1,0 +1,285 @@
+import { type Metadata } from "next";
+import { pageProperties } from "./properties";
+import CodeInline from "@/app/_components/code/codeInline";
+import ExternalLink from "@/app/_components/externalLink";
+import { siteTitle } from "@/app/_shared/const";
+
+export const metadata: Metadata = {
+    title: `${pageProperties.name} - ${siteTitle}`,
+};
+
+const AtCoderDifficulty = (): JSX.Element => {
+    return (
+        <article className="main-article">
+            <h1>{pageProperties.name}</h1>
+            <p>{pageProperties.description}</p>
+
+            {/* ここにスクリーンショット */}
+
+            <h2>リンク</h2>
+            <iframe
+                title="AtCoder Difficulty"
+                src="https://hatenablog-parts.com/embed?url=https://matcher9131.github.io/atcoder-difficulty/"
+                className="w-full max-w-screen-sm"
+            ></iframe>
+
+            <h2>Github</h2>
+            <iframe
+                title="matcher9131/atcoder-difficulty"
+                src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131/atcoder-difficulty"
+                className="w-full max-w-screen-sm"
+            ></iframe>
+
+            <h2>機能</h2>
+            <ul>
+                <li>
+                    競技プログラミングコンテストサイト「<ExternalLink href="https://atcoder.jp/">AtCoder</ExternalLink>
+                    」 の各種統計をグラフィカルに表示
+                    <ul>
+                        <li>各問題の推定難易度、および実際の参加者のレーティングによる正答率分布</li>
+                        <li>各コンテストの参加者のレーティング分布</li>
+                        <li>各コンテストにおける獲得点数とレーティングの対応表</li>
+                    </ul>
+                </li>
+                <li>ユーザー名を入力することで推定難易度に加え推定正答率も表示できる</li>
+            </ul>
+
+            <h2>動作推奨環境</h2>
+            <p>Google Chrome 最新版</p>
+
+            <h2>使用技術</h2>
+            <table className="table table-lg max-w-[400px]">
+                <thead>
+                    <tr>
+                        <th>種別</th>
+                        <th>名称</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>プログラミング言語</td>
+                        <td>TypeScript</td>
+                    </tr>
+                    <tr>
+                        <td>プログラミング言語（バッチスクリプト）</td>
+                        <td>Python</td>
+                    </tr>
+                    <tr>
+                        <td>フロントエンドライブラリ</td>
+                        <td>React</td>
+                    </tr>
+                    <tr>
+                        <td>状態管理ライブラリ</td>
+                        <td>Jotai</td>
+                    </tr>
+                    <tr>
+                        <td>グラフライブラリ</td>
+                        <td>Chart.js</td>
+                    </tr>
+                    <tr>
+                        <td>CSSフレームワーク</td>
+                        <td>Tailwind CSS</td>
+                    </tr>
+                    <tr>
+                        <td>CSSフレームワーク</td>
+                        <td>daisyUI</td>
+                    </tr>
+                    <tr>
+                        <td>バックエンドサービス</td>
+                        <td>Supabase</td>
+                    </tr>
+                    <tr>
+                        <td>ビルドツール</td>
+                        <td>Vite</td>
+                    </tr>
+                    <tr>
+                        <td>リンター</td>
+                        <td>ESLint</td>
+                    </tr>
+                    <tr>
+                        <td>テストツール</td>
+                        <td>Vitest</td>
+                    </tr>
+                    <tr>
+                        <td>テストライブラリ</td>
+                        <td>React Testing Library</td>
+                    </tr>
+                    <tr>
+                        <td>CI/CD</td>
+                        <td>GitHub Actions</td>
+                    </tr>
+                    <tr>
+                        <td>生成AI</td>
+                        <td>Claude Code ※主にテストコード作成に使用</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>このサイトを作ったきっかけ</h2>
+            <p>
+                AtCoderの問題復習支援サイトといえば
+                <ExternalLink href="https://recoiljs.org/docs/guides/testing">AtCoder Problems</ExternalLink>
+                があるが、2025年に入ってからこのサイトにおける各問題の推定難易度表示の更新が（長ければ1か月以上も）止まることがあり、自分が解けた
+                or 解けなかった問題がどの程度の難易度だったのかを知ることが難しくなってしまった。
+            </p>
+            <p>
+                しかしAtCoderにおいて各コンテスト参加者のレーティングと問題が解けたかどうかのデータは公開されており、さらに問題の難易度推定は
+                <ExternalLink href="https://ja.wikipedia.org/wiki/%E9%A0%85%E7%9B%AE%E5%BF%9C%E7%AD%94%E7%90%86%E8%AB%96">
+                    IRT（項目応答理論）
+                </ExternalLink>
+                でできることを知っていたので、「ついでにPythonの習得も兼ねて自分でやってみるのもアリなのではないか」と思い立つに至った。
+            </p>
+
+            <h2>使用技術の選定理由</h2>
+            <h3>SPAかMPAか</h3>
+            <p>
+                表示するものは文字列・数値のみでグラフィック等がないため、一度にそれなりの量を読み込んでも時間がかからない。
+                それならばページ遷移のたびに多少なりとも待ち時間が発生するMPAはメリットが薄いと判断し、SPAを採用した。
+            </p>
+
+            <h3>プログラミング言語およびフロントエンドライブラリ</h3>
+            <p>SPAなのでいつものTypeScript + Reactの構成を選択した。</p>
+
+            <h3>バッチスクリプトのプログラミング言語</h3>
+            <p>
+                統計処理が必要になるのでPythonとRを検討し、自身のスキルとしてより役立ちそうなPythonを選択した。（統計処理とはいっても高度に複雑なことをやるわけではないので、
+                最悪<CodeInline>numpy</CodeInline>と<CodeInline>scipy.optimize</CodeInline>
+                さえあれば大丈夫やろ！の精神で）
+            </p>
+
+            <h3>状態管理ライブラリ</h3>
+            <p>
+                これまでRecoilを使っていたがメンテナンスの将来性がどうも怪しくなってきたので、これを機にJotaiを使ってみることにした。
+            </p>
+
+            <h3>ビルドツール</h3>
+            <p>Viteで困ったことがないためいつも通りViteで。</p>
+
+            <h2>開発時に苦労した点・工夫した点</h2>
+            <h3>AtCoderのレーティングシステムに起因する難易度推定の際に考慮すべき事項</h3>
+            <p>
+                AtCoderのレーティングシステムは
+                <ExternalLink href="https://www.dropbox.com/scl/fi/2jbios4dut90lqszooqxi/rating.pdf?rlkey=37ihxdai8nfcm51l9ekhv3z4d&e=1&dl=0">
+                    公開されている資料
+                </ExternalLink>
+                にあるとおり、パフォーマンス値を用いた計算による値（以降、これを<strong>生レーティング</strong>
+                と呼ぶ）から「参加回数による補正値」を引くという構図になっている。
+            </p>
+            <p>
+                ここでこの「参加回数による補正値」がかなりの厄介者となる。というのもリセマラ防止の側面もあるためかかなり巨大なものとなっており、
+                具体的には10回参加したユーザーでも150程度、極端な例だと1回のみ参加したユーザーでは1200にもなる
+            </p>
+            <p>
+                問題の難易度を推定する際においては、その問題が解かれるかどうかは各ユーザーの
+                <strong>生レーティング</strong>
+                にのみ相関がある、としたいわけで、これほどの巨大な補正（しかもユーザーの実力に関係がない！）があると推定結果が大いに歪むことが想定される。
+            </p>
+            <p>
+                例えば参加回数がある一定水準（例えば20回程度）に満たないユーザーを無視して難易度推定を行うという手法もあるが、参加回数と実力には強い正の相関があるため
+                <sup>[要出典]</sup>
+                特に低難易度帯において対象となるユーザーの正答率が本来より高くなってしまう可能性が高い。
+            </p>
+            <p>
+                よって各ユーザーのコンテスト参加回数を取得し、<strong>生レーティング</strong>
+                を逆算して各問題の難易度推定を行おうとしたが、ここで問題が発生する。
+            </p>
+            <p>
+                AtCoderではいくつかのデータがJSON形式でも公開されており、各コンテストの順位表もそれにあたる。
+                そしてそのJSONには各ユーザーのコンテスト参加回数が記載されているので、これをそのまま使えばよいと思いきや、この値は
+                <strong>JSONにアクセスした日時</strong>
+                におけるものであり、ユーザーが該当するコンテストに参加した時点のものではない。
+                よって最新のコンテストならともかく、昔のコンテストを遡って難易度推定を行おうとするとこの値は使えない。
+            </p>
+            <p>
+                ただ情報サイトを作る以上、過去のものを掲載しないというのはイマイチすぎる。よって各ユーザーページを個別に見ることでなんとか対応することにした。
+                アクセスするページ数が膨大に跳ね上がるが、十分に間隔を取ってAtCoderのサイトに負担がかからないように配慮した。
+            </p>
+            <p>
+                （なお前述の通り新しいコンテストのものを取得する際にはこの問題は発生しないため、後述するCI/CDを行う際にはすべてのユーザーページを見ているわけではない）
+            </p>
+
+            <h3>CI/CD</h3>
+            <p>
+                このアプリを作ったきっかけの項でも触れたが、本サイトは各問題の推定難易度を比較的速やかに提供するのが目的であるため、継続的な更新が必要となる。
+            </p>
+            <p>
+                しかし手動で更新を行うと必ず抜け・漏れが発生するのが人の性である。せっかくなので最新コンテストのデータ取得から各統計処理、サイト更新までを自動で行えるようにGitHub
+                ActionsでPythonスクリプトを実行するようにした。
+                現状コンテストは土日の21:00(JST)から始まることがほとんどなので、AtCoder側のレーティング更新にかかる時間も考えて実行時間を土日の24:00(JST)に設定している。
+            </p>
+
+            <h3>AtCoder Problemsとの差別化</h3>
+            <p>
+                いくら速報性が比較的高いとはいえ、単に各問題の推定難易度を載せるだけなら単なる二番煎じに過ぎず、かつあちらのほうが多機能である。そこで2つの機能で差別化を図った。
+            </p>
+
+            <h4>厳密な難易度推定</h4>
+            <p>
+                難易度推定にはAtCoder
+                Problemsでも本サイトでもIRT（2パラメータロジスティックモデル、以下2PL）を用いている。2PLでは以下の2つのパラメータで問題の難易度を記述する。
+            </p>
+            <ul>
+                <li>困難度: 問題の難しさを示す数値であり、正答率が50%になるようなレーティングを表す。</li>
+                <li>
+                    識別力:
+                    高いほど高レーティング者の正答率が高く＆低レーティング者の正答率が低くなる。低いほど高レーティング者でも間違う代わりに低レーティング者でも正解できる余地がある。
+                </li>
+            </ul>
+            <p>
+                AtCoder
+                Problemsでは計算量削減のためか識別力を一定の値に固定して計算しているため、Recommendedで表示される各問題の推定正答率は問題の困難度にのみ依存している。
+                すなわち、「低レーティング者でも正解できる余地のある問題」などが埋もれてしまう。ここに差別化の余地があるとみて、本サイトでは識別力も計算することにした。
+            </p>
+            <p>
+                ただしIRTによる推定を行えるPythonライブラリをいくつか探してみたが、
+                各受験者の能力値（レーティング）と正答したかどうかのみを与えて問題の識別力と困難度を得られるものがどうにも見つからなかった（探すのが下手なだけかもしれないが……）ため、
+                <CodeInline>scipy.optimize.minimize</CodeInline>を用いて最小二乗法で識別力と困難度を求めることに。
+            </p>
+            <p>
+                使用するモデルや食わせるデータを色々試行錯誤した結果、モデルは<CodeInline>Nelder-Mead</CodeInline>
+                、食わせる能力値は<CodeInline>(x - x0) / 600</CodeInline>（<CodeInline>x0</CodeInline>
+                は全参加者の平均レーティング）とするのが最も収束しやすいらしいことがわかり、それを採用した。
+            </p>
+
+            <h4>コンテストに対する統計</h4>
+            <p>
+                例えばpaizaのような1問を解く毎にレーティングが変動するようなサービスとは異なり、AtCoderはコンテストの中でどの問題をどれだけ素早く解くのかによってレーティングが変化する。
+                よって1問ごとの難易度も勿論重要なのだが、1つのコンテスト内で問題を横断する情報も同様あるいはそれ以上の価値を持つ。
+                AtCoder Problemsはコンテストの統計情報を載せていないため、ここも差別化の余地になるとみた。
+            </p>
+            <p>
+                具体的には各コンテストにおけるスコア・順位とレーティング（正しくはパフォーマンス）の対応表を作ることにした。以下の2点ともが気になるポイントになると考え、2つとも実装した。
+            </p>
+            <ul>
+                <li>
+                    どの問題を正解すれば最低どの程度のパフォーマンスになるのか
+                    <ul>
+                        <li>
+                            コンテスト内の問題数を<CodeInline>N</CodeInline>として正解・不正解の全組み合わせ
+                            <CodeInline>2^N</CodeInline>
+                            通りのそれぞれにおいて最も時間がかかったユーザーのパフォーマンスを記録する。該当する参加者が存在しない場合はスキップ。
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    あるパフォーマンスを得るにはどの問題をどれくらいの時間で正解する必要があるのか
+                    <ul>
+                        <li>
+                            ユーザー名の色が変化する400の倍数のパフォーマンスを対象に、該当するパフォーマンスを取得したユーザーが存在すればそのスコアと時間を記録する。
+                            存在しない場合はその前後のユーザーから推定されるスコアと時間を記録する。
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p>
+                しれっとユーザーのパフォーマンスを取得するように書いているが、コンテストのJSONデータには各プレイヤーが得たパフォーマンスが記載されているわけではない。
+                そのためこれもユーザーページにアクセスして情報を得る必要がある。
+                勿論全参加ユーザーを見るのは非効率なので二分探索を用いているのだが、稀にユーザーが削除されている場合があるため「降順に並んでいるもののアクセスするまで値が
+                <CodeInline>null</CodeInline>
+                かどうかがわからない配列に対する二分探索」という謎のアルゴリズムを組む羽目になった。
+            </p>
+        </article>
+    );
+};
+
+export default AtCoderDifficulty;
