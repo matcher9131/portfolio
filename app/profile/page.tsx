@@ -37,9 +37,9 @@ const Profile = (): JSX.Element => {
                     <tr>
                         <th>Skills:</th>
                         <td>
-                            TOEIC Score 800 (Sep. 2023)
+                            TOEIC Score 800
                             <br />
-                            AtCoder Rating 1304
+                            AtCoder Rating 1457 (Highest)
                         </td>
                     </tr>
                     <tr>
