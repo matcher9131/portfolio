@@ -20,12 +20,12 @@ const Works = (): JSX.Element => {
             ></iframe>
 
             <h2>Lineup</h2>
-            <section className="flex gap-x-4">
+            <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
                 {getWorksPages().map((page) => (
                     <TransitionLink
                         key={page.path}
                         href={page.path}
-                        className="card card-compact w-72 transition-all hover:-translate-y-1 hover:bg-base-200"
+                        className="card card-compact w-full min-w-72 transition-all hover:-translate-y-1 hover:bg-base-200"
                     >
                         <figure>ここに画像</figure>
                         <div className="card-body">
