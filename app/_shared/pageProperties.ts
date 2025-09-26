@@ -1,5 +1,6 @@
 import { pageProperties as profilePageProperties } from "../profile/properties";
 import { pageProperties as skillPageProperties } from "../skills/properties";
+import { pageProperties as acddifPageProperties } from "../works/acddif/properties";
 import { pageProperties as billPageProperties } from "../works/bill/properties";
 import { pageProperties as kcqmPageProperties } from "../works/kcqm/properties";
 import { pageProperties as multiTimerPageProperties } from "../works/multitimer/properties";
@@ -20,6 +21,7 @@ const pageProperties: readonly PageProperty[] = [
     },
     profilePageProperties,
     worksPageProperties,
+    acddifPageProperties,
     kcqmPageProperties,
     multiTimerPageProperties,
     slidePageProperties,
