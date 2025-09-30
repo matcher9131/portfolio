@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import Picture from "next-export-optimize-images/picture";
 import NumericUpDown from "./_codes/numericUpdown";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
@@ -16,7 +17,16 @@ const MultiTimer = (): JSX.Element => {
                 <h1>{pageProperties.name}</h1>
                 <p>{pageProperties.description}</p>
 
-                {/* ここにスクリーンショット */}
+                <h2>スクリーンショット</h2>
+                <div className="w-2/3">
+                    <Picture
+                        src="/works/multitimer/screenshot.png"
+                        alt="スクリーンショット"
+                        width={1280}
+                        height={720}
+                        objectFit="contain"
+                    />
+                </div>
 
                 <h2>Github</h2>
                 <iframe
