@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import Picture from "next-export-optimize-images/picture";
 import { TransitionLink } from "../_components/pageTransition/transitionLink";
 import { getWorksPages } from "../_shared/pageProperties";
 import { pageProperties } from "./properties";
@@ -27,7 +28,15 @@ const Works = (): JSX.Element => {
                         href={page.path}
                         className="card card-compact w-full min-w-72 transition-all hover:-translate-y-1 hover:bg-base-200"
                     >
-                        <figure>ここに画像</figure>
+                        <figure>
+                            <Picture
+                                src={`${page.path}/icon.png`}
+                                alt="アイコン"
+                                width={96}
+                                height={96}
+                                objectFit="contain"
+                            />
+                        </figure>
                         <div className="card-body">
                             <h2 className="no-decoration">{page.name}</h2>
                             <p>{page.description}</p>
