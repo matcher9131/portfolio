@@ -28,7 +28,7 @@ const Works = (): JSX.Element => {
                         href={page.path}
                         className="card card-compact w-full min-w-72 transition-all hover:-translate-y-1 hover:bg-base-200"
                     >
-                        <figure>
+                        <figure className="py-4">
                             <Picture
                                 src={`${page.path}/icon.png`}
                                 alt="アイコン"
