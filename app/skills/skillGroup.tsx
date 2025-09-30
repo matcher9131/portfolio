@@ -11,6 +11,10 @@ const Star = ({ refCallback }: { readonly refCallback: (instance: SVGSVGElement)
                 fillRule="nonzero"
                 points="0,-100 -58.78,80.90 95.11,-30.90 -95.11,-30.90 58.78,80.90"
             />
+            <polygon
+                fill="gold"
+                points="0,0 -22.45,-30.9 -95.11,-30.9 0,0 -36.33,11.8 -58.78,80.9 0,0 0,38.2 58.78,80.9 0,0 36.33,11.8 95.11,-30.9 0,0 22.45,-30.9 0,-100"
+            />
         </svg>
     );
 };
