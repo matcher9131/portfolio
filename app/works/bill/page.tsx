@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import Picture from "next-export-optimize-images/picture";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
 import { siteTitle } from "@/app/_shared/const";
@@ -13,7 +14,16 @@ const Bill = (): JSX.Element => {
             <h1>{pageProperties.name}</h1>
             <p>{pageProperties.description}</p>
 
-            {/* ここにスクリーンショット */}
+            <h2>スクリーンショット</h2>
+            <div className="w-2/3">
+                <Picture
+                    src="/works/bill/screenshot.png"
+                    alt="スクリーンショット"
+                    width={1280}
+                    height={720}
+                    objectFit="contain"
+                />
+            </div>
 
             <h2>Github</h2>
             <iframe
