@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import Picture from "next-export-optimize-images/picture";
 import ColumnHeader from "./_code/columnHeader";
 import LazySearch from "./_code/lazySearch";
 import { pageProperties } from "./properties";
@@ -16,7 +17,16 @@ const KanColleQuestManager = (): JSX.Element => {
             <h1>{pageProperties.name}</h1>
             <p>{pageProperties.description}</p>
 
-            {/* ここにスクリーンショット */}
+            <h2>スクリーンショット</h2>
+            <div className="w-2/3">
+                <Picture
+                    src="/works/kcqm/screenshot.png"
+                    alt="スクリーンショット"
+                    width={1280}
+                    height={720}
+                    objectFit="contain"
+                />
+            </div>
 
             <h2>リンク</h2>
             <iframe
