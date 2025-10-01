@@ -1,5 +1,4 @@
 import { type Metadata } from "next";
-import Picture from "next-export-optimize-images/picture";
 import NumericUpDown from "./_codes/numericUpdown";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
@@ -19,13 +18,8 @@ const MultiTimer = (): JSX.Element => {
 
                 <h2>スクリーンショット</h2>
                 <div className="w-2/3">
-                    <Picture
-                        src="/works/multitimer/screenshot.png"
-                        alt="スクリーンショット"
-                        width={1280}
-                        height={720}
-                        objectFit="contain"
-                    />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img alt="スクリーンショット" src="/works/multitimer/screenshot.png" />
                 </div>
 
                 <h2>Github</h2>

@@ -1,5 +1,4 @@
 import { type Metadata } from "next";
-import Picture from "next-export-optimize-images/picture";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
 import { siteTitle } from "@/app/_shared/const";
@@ -16,12 +15,11 @@ const Bill = (): JSX.Element => {
 
             <h2>スクリーンショット</h2>
             <div className="w-2/3">
-                <Picture
-                    src="/works/bill/screenshot.png"
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                     alt="スクリーンショット"
-                    width={1280}
-                    height={720}
-                    objectFit="contain"
+                    src="/works/bill/screenshot.png"
+                    srcSet="/works/bill/screenshot-480.png 480w, /works/bill/screenshot.png 1280w"
                 />
             </div>
 
