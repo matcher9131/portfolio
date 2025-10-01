@@ -8,6 +8,9 @@ const nextConfig = withExportImages({
     basePath: isProd ? "/portfolio" : "",
     assetPrefix: isProd ? "/portfolio/" : "",
     trailingSlash: true,
+    images: {
+        unoptimized: true,
+    },
 });
 
 export default nextConfig;
