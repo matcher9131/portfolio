@@ -9,16 +9,13 @@ const Breadcrumb = (): JSX.Element | null => {
     // rootにはBreadcrumbを表示しない
     if (path === "/") return null;
 
-    const segments = path.split("/").filter((s) => s !== "");
-    const paths = [
-        "/",
-        ...segments.map(
-            (
-                (parent) => (child) =>
-                    (parent += "/" + child)
-            )(""),
-        ),
-    ];
+    const segments = ["", ...path.split("/").filter((s) => s !== "")];
+    const paths = segments.map(
+        (
+            (parent) => (child) =>
+                (parent += child + "/")
+        )(""),
+    );
 
     return (
         <nav className="breadcrumbs w-full">

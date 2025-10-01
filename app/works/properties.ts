@@ -1,6 +1,6 @@
 import { type PageProperty } from "../_shared/pageProperties";
 
 export const pageProperties: PageProperty = {
-    path: "/works",
+    path: "/works/",
     name: "Works",
 };

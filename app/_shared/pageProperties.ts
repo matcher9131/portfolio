@@ -35,4 +35,4 @@ export const getPageName = (path: string): string | null =>
 
 export const getWorksPages = (): PageProperty[] => pageProperties.filter((page) => /^\/works\/.+$/.test(page.path));
 
-export const getChildPages = (): PageProperty[] => pageProperties.filter((page) => /^\/[^/]+$/.test(page.path));
+export const getChildPages = (): PageProperty[] => pageProperties.filter((page) => /^\/[^/]+\/$/.test(page.path));
