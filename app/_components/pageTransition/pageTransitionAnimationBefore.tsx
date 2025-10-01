@@ -8,7 +8,7 @@ import { classes } from "@/app/_util/classes";
 // eslint-disable-next-line react/display-name
 const Star = forwardRef<SVGSVGElement>((_, ref): JSX.Element => {
     return (
-        <svg ref={ref} viewBox="-100 -100 200 200" className="absolute -top-[5vw] h-[5vw] w-[5vw] overflow-clip">
+        <svg ref={ref} viewBox="-100 -100 200 200" className="absolute -top-[999px] h-0 w-0 overflow-clip">
             <polygon
                 fill="yellow"
                 fillRule="nonzero"

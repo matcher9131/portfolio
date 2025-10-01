@@ -83,7 +83,7 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
         return Promise.all([
             ...starRefs.map(
                 (ref) =>
-                    ref?.current?.animate([{ left: 0, top: `${-starUnit}vw` }], {
+                    ref?.current?.animate([{ left: 0, top: `-999px` }], {
                         duration: 1,
                         fill: "forwards",
                     })?.finished,

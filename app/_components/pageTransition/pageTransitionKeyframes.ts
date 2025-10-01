@@ -29,15 +29,15 @@ const factories: KeyframesFactory[] = [
         ],
         getBackgroundKeyframes: (index: number): Keyframe[] => [
             {
-                left: `${index * starUnit - backgroundMargin}vw`,
+                left: `${index * starUnit - 2 * backgroundMargin}vw`,
                 top: `${backgroundTop}vw`,
-                width: `${starUnit + 2 * backgroundMargin}vw`,
+                width: `${starUnit + 4 * backgroundMargin}vw`,
                 height: 0,
             },
             {
-                left: `${index * starUnit - backgroundMargin}vw`,
+                left: `${index * starUnit - 2 * backgroundMargin}vw`,
                 top: `${backgroundTop}vw`,
-                width: `${starUnit + 2 * backgroundMargin}vw`,
+                width: `${starUnit + 4 * backgroundMargin}vw`,
                 height: `calc(100vh + ${starUnit}vw)`,
             },
         ],
