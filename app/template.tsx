@@ -30,7 +30,7 @@ const Template = ({ children }: TemplateProps): JSX.Element => {
 
     return (
         <div ref={ref}>
-            <div className="container mx-auto flex flex-col max-sm:px-4">
+            <div className="container mx-auto flex flex-col px-4">
                 <header className="w-full">
                     <Breadcrumb />
                 </header>
