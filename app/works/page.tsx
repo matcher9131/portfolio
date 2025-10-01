@@ -1,7 +1,7 @@
 import { type Metadata } from "next";
 import { TransitionLink } from "../_components/pageTransition/transitionLink";
+import ImgWithBasePath from "../_shared/imgWithBasePath";
 import { getWorksPages } from "../_shared/pageProperties";
-import { withBasePath } from "../_util/basePath";
 import { pageProperties } from "./properties";
 import { siteTitle } from "@/app/_shared/const";
 
@@ -29,8 +29,7 @@ const Works = (): JSX.Element => {
                         className="card card-compact w-full min-w-72 transition-all hover:-translate-y-1 hover:bg-base-200"
                     >
                         <figure className="py-4">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={withBasePath(`${page.path}/icon.png`)} alt="アイコン" width={96} height={96} />
+                            <ImgWithBasePath src={`${page.path}/icon.png`} alt="アイコン" width={96} height={96} />
                         </figure>
                         <div className="card-body">
                             <h2 className="no-decoration">{page.name}</h2>

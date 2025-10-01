@@ -4,6 +4,7 @@ import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
 import ExternalLink from "@/app/_components/externalLink";
 import { siteTitle } from "@/app/_shared/const";
+import ImgWithBasePath from "@/app/_shared/imgWithBasePath";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,
@@ -18,8 +19,7 @@ const MultiTimer = (): JSX.Element => {
 
                 <h2>スクリーンショット</h2>
                 <div className="w-2/3">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img alt="スクリーンショット" src="/works/multitimer/screenshot.png" />
+                    <ImgWithBasePath src="/works/multitimer/screenshot.png" alt="スクリーンショット" />
                 </div>
 
                 <h2>Github</h2>
