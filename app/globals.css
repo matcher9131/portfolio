@@ -29,6 +29,9 @@
     h2 {
         @apply mb-2 mt-7 border-b-[1px] border-b-neutral-content text-2xl font-extrabold;
     }
+    h2.no-decoration {
+        @apply mb-2 mt-7 border-none text-2xl font-extrabold;
+    }
     h3 {
         @apply mb-2 mt-5 text-xl font-bold;
     }

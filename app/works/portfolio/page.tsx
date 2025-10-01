@@ -5,8 +5,8 @@ import TemplateEffect from "./_codes/templateEffect";
 import TransitionLinkAfter from "./_codes/transitionLinkAfter";
 import TransitionLinkBefore from "./_codes/transitionLinkBefore";
 import TransitionLinkTypeDeclaration from "./_codes/transitionLinkTypeDeclaration";
-import CodeBlock from "@/app/components/code/codeBlock";
-import CodeInline from "@/app/components/code/codeInline";
+import CodeBlock from "@/app/_components/code/codeBlock";
+import CodeInline from "@/app/_components/code/codeInline";
 
 const Portfolio = (): JSX.Element => {
     return (
@@ -68,19 +68,19 @@ const Portfolio = (): JSX.Element => {
                 まずReact + TypeScriptは確定で（理由は他作品で述べた通り）、さらに毎度愛用しているRecoil、Tailwind
                 CSS、daisyUIを今回も起用。
                 <br />
-                「艦これ任務リストマネージャー」のようにviteのビルドオプションをいじってReactで複数のページを作っても良いのだが、ページを追加するたびにオプションをいじるのも面倒だし、そもそもアニメーション以外クライアント側で動かすものが無い静的サイトでクライアントサイドレンダリングは何か違う…と思い、Next.jsでSSG(Static
+                「艦これ任務リストマネージャー」のようにViteのビルドオプションをいじってReactで複数のページを作っても良いのだが、ページを追加するたびにオプションをいじるのも面倒だし、そもそもアニメーション以外クライアント側で動かすものが無い静的サイトで全面クライアントサイドレンダリングは何か違う…と思い、Next.jsでSSG(Static
                 Site Generation)を行うことにした。
             </p>
 
             <h2>開発時に苦労した点・工夫した点</h2>
             <h3>ページ遷移アニメーション</h3>
             <p>
-                ポートフォリオには個性が必要だ、ということでちょっと凝ったページ遷移アニメーションを実装しようと考えた。それが「多数の星が流れてきてページの内容を消していく」というものである。
+                どうせならあまり検索でひっかからないタイプのページ遷移アニメーションを実装しようと考えた。それが「多数の星が流れてきてページの内容を消していく」というものである。
                 <br />
                 これを実現するために使える技術を選定していく。
             </p>
 
-            <h4>ページ遷移後のアニメーションの技術選定</h4>
+            <h4>ページ遷移前アニメーションの技術選定</h4>
             <ul>
                 <li>
                     View Transitions API
@@ -208,11 +208,11 @@ const Portfolio = (): JSX.Element => {
             <p>
                 先述のカスタムフック<CodeInline>usePageTransitionAnimation</CodeInline>
                 にページ遷移後のアニメーションを行うメソッド
-                <CodeInline>animateBeforeTransition</CodeInline>
+                <CodeInline>animateAfterTransition</CodeInline>
                 を実装し、これを然るべきところでimportして使う。
                 <br />
                 その然るべき場所というのは<CodeInline>template</CodeInline>である。<CodeInline>useEffect</CodeInline>
-                でURLの変化を検知し、そこに<CodeInline>animateBeforeTransition</CodeInline>を仕込む。
+                でURLの変化を検知し、そこに<CodeInline>animateAfterTransition</CodeInline>を仕込む。
             </p>
             <TemplateEffect />
         </article>

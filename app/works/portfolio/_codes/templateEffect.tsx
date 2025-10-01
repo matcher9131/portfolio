@@ -1,8 +1,8 @@
-import CodeBlock from "@/app/components/code/codeBlock";
-import CodeFunction from "@/app/components/code/codeHighlight/codeFunction";
-import CodeKeyword from "@/app/components/code/codeHighlight/codeKeyword";
-import CodeVariable from "@/app/components/code/codeHighlight/codeVariable";
-import CodeRow from "@/app/components/code/codeRow";
+import CodeBlock from "@/app/_components/code/codeBlock";
+import CodeFunction from "@/app/_components/code/codeHighlight/codeFunction";
+import CodeKeyword from "@/app/_components/code/codeHighlight/codeKeyword";
+import CodeVariable from "@/app/_components/code/codeHighlight/codeVariable";
+import CodeRow from "@/app/_components/code/codeRow";
 
 const TemplateEffect = (): JSX.Element => {
     // prettier-ignore

@@ -3,9 +3,9 @@
 import { usePathname } from "next/navigation";
 import { useEffect, type ReactNode } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import Breadcrumb from "./components/breadcrumb";
-import { clipRefState, isAnimatingState } from "./components/pageTransition/states";
-import { usePageTransitionAnimation } from "./components/pageTransition/usePageTransitionAnimation";
+import Breadcrumb from "./_components/breadcrumb";
+import { clipRefState, isAnimatingState } from "./_components/pageTransition/states";
+import { usePageTransitionAnimation } from "./_components/pageTransition/usePageTransitionAnimation";
 
 type TemplateProps = {
     readonly children: ReactNode;

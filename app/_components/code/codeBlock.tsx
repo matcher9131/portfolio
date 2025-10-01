@@ -9,7 +9,7 @@ type CodeBlockProps = {
 const CodeBlock = ({ children, fileName, language }: CodeBlockProps): JSX.Element => {
     return (
         <div className="rounded-md bg-black text-white">
-            <div className="flex justify-between text-xs">
+            <div className="flex justify-between font-sans text-xs">
                 {fileName != null ? (
                     <div className="rounded-tl-md bg-neutral px-1 py-0.5">{fileName}</div>
                 ) : (

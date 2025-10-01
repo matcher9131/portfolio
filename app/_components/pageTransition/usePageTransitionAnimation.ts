@@ -70,7 +70,7 @@ export const usePageTransitionAnimation = (): UsePageTransitionAnimationReturnTy
                     },
                 ],
                 {
-                    duration: 150,
+                    duration: 200,
                     fill: "forwards",
                     easing: "ease-in",
                 },

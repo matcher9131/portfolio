@@ -3,7 +3,7 @@
 import { forwardRef } from "react";
 import { useRecoilValue } from "recoil";
 import { backgroundRefStates, starRefStates } from "./states";
-import { classes } from "@/app/util/classes";
+import { classes } from "@/app/_util/classes";
 
 // eslint-disable-next-line react/display-name
 const Star = forwardRef<SVGSVGElement>((_, ref): JSX.Element => {
@@ -13,6 +13,10 @@ const Star = forwardRef<SVGSVGElement>((_, ref): JSX.Element => {
                 fill="yellow"
                 fillRule="nonzero"
                 points="0,-100 -58.78,80.90 95.11,-30.90 -95.11,-30.90 58.78,80.90"
+            />
+            <polygon
+                fill="orange"
+                points="0,0 -22.45,-30.9 -95.11,-30.9 0,0 -36.33,11.8 -58.78,80.9 0,0 0,38.2 58.78,80.9 0,0 36.33,11.8 95.11,-30.9 0,0 22.45,-30.9 0,-100"
             />
         </svg>
     );
