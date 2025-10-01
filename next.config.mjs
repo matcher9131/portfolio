@@ -1,9 +1,7 @@
-import withExportImages from "next-export-optimize-images";
-
 const isProd = process.env.NODE_ENV === "production";
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withExportImages({
+const nextConfig = {
     output: "export",
     basePath: isProd ? "/portfolio" : "",
     assetPrefix: isProd ? "/portfolio/" : "",
@@ -11,6 +9,6 @@ const nextConfig = withExportImages({
     images: {
         unoptimized: true,
     },
-});
+};
 
 export default nextConfig;
