@@ -1,11 +1,11 @@
 import { type Metadata } from "next";
-import Picture from "next-export-optimize-images/picture";
 import ColumnHeader from "./_code/columnHeader";
 import LazySearch from "./_code/lazySearch";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
 import ExternalLink from "@/app/_components/externalLink";
 import { siteTitle } from "@/app/_shared/const";
+import PictureWithBasePath from "@/app/_shared/pictureWithBasePath";
 
 export const metadata: Metadata = {
     title: `${pageProperties.name} - ${siteTitle}`,
@@ -19,7 +19,7 @@ const KanColleQuestManager = (): JSX.Element => {
 
             <h2>スクリーンショット</h2>
             <div className="w-2/3">
-                <Picture
+                <PictureWithBasePath
                     src="/works/kcqm/screenshot.png"
                     alt="スクリーンショット"
                     width={1280}
