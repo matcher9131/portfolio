@@ -48,6 +48,8 @@ const Profile = (): JSX.Element => {
                             Video games
                             <br />
                             Piano
+                            <br />
+                            Competitive programming
                         </td>
                     </tr>
                 </tbody>
