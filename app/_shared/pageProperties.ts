@@ -7,6 +7,7 @@ import { pageProperties as multiTimerPageProperties } from "../works/multitimer/
 import { pageProperties as portfolioPageProperties } from "../works/portfolio/properties";
 import { pageProperties as worksPageProperties } from "../works/properties";
 import { pageProperties as slidePageProperties } from "../works/slide/properties";
+import { pageProperties as virejoPageProperties } from "../works/virejo/properties";
 
 export type PageProperty = {
     readonly path: string;
@@ -23,10 +24,11 @@ const pageProperties: readonly PageProperty[] = [
     worksPageProperties,
     acddifPageProperties,
     kcqmPageProperties,
-    multiTimerPageProperties,
-    slidePageProperties,
+    virejoPageProperties,
     billPageProperties,
     portfolioPageProperties,
+    multiTimerPageProperties,
+    slidePageProperties,
     skillPageProperties,
 ];
 
