@@ -18,7 +18,8 @@ const Home = (): JSX.Element => {
     };
 
     useEffect(() => {
-        if (itemsRef.current != null) {
+        requestAnimationFrame(() => {
+            if (itemsRef.current == null) return;
             let delay = 0;
             const delayStep = 300;
             const duration = 1500;
@@ -36,11 +37,12 @@ const Home = (): JSX.Element => {
                     ],
                     {
                         duration: duration + delay,
+                        fill: "forwards",
                     },
                 );
                 delay += delayStep;
             }
-        }
+        });
     });
 
     return (
@@ -62,6 +64,7 @@ const Home = (): JSX.Element => {
                     "text-center",
                     "border-none",
                     "py-40",
+                    "opacity-0",
                 )}
             >
                 {siteTitle}
@@ -79,6 +82,7 @@ const Home = (): JSX.Element => {
                                 map.delete(path);
                             };
                         }}
+                        className="opacity-0"
                     >
                         <TransitionLink
                             href={path}
