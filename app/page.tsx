@@ -46,7 +46,7 @@ const Home = (): JSX.Element => {
     });
 
     return (
-        <main className="flex flex-col items-center">
+        <div className="flex flex-col items-center">
             <h1
                 ref={(node) => {
                     const map = getMap();
@@ -110,7 +110,7 @@ const Home = (): JSX.Element => {
                     </li>
                 ))}
             </ul>
-        </main>
+        </div>
     );
 };
 
