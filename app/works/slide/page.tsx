@@ -7,6 +7,7 @@ import CodeProperty from "@/app/_components/code/codeHighlight/codeProperty";
 import CodeType from "@/app/_components/code/codeHighlight/codeType";
 import CodeIndent from "@/app/_components/code/codeIndent";
 import CodeInline from "@/app/_components/code/codeInline";
+import LinkCard from "@/app/_components/linkCard/linkCard";
 import { siteTitle } from "@/app/_shared/const";
 import { classes } from "@/app/_util/classes";
 
@@ -47,11 +48,7 @@ const Slide = (): JSX.Element => {
                 {/* ここにスクリーンショット */}
 
                 <h2>Github</h2>
-                <iframe
-                    title="matcher9131/Slide"
-                    src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131/Slide"
-                    className="w-full max-w-screen-sm"
-                ></iframe>
+                <LinkCard href="https://github.com/matcher9131/Slide" />
 
                 <h2>機能</h2>
                 <ul>

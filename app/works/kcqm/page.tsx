@@ -4,6 +4,7 @@ import LazySearch from "./_code/lazySearch";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
 import ExternalLink from "@/app/_components/externalLink";
+import LinkCard from "@/app/_components/linkCard/linkCard";
 import { siteTitle } from "@/app/_shared/const";
 import ImgWithBasePath from "@/app/_shared/imgWithBasePath";
 
@@ -31,11 +32,7 @@ const KanColleQuestManager = (): JSX.Element => {
             </div>
 
             <h2>リンク</h2>
-            <iframe
-                title="艦これ任務リストマネージャー"
-                src="https://hatenablog-parts.com/embed?url=https://kc-quest.net/"
-                className="w-full max-w-screen-sm"
-            ></iframe>
+            <LinkCard href="https://kc-quest.net/" />
 
             <h2>機能</h2>
             <ul>

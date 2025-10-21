@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
+import LinkCard from "@/app/_components/linkCard/linkCard";
 import { siteTitle } from "@/app/_shared/const";
 import ImgWithBasePath from "@/app/_shared/imgWithBasePath";
 
@@ -28,18 +29,10 @@ const Bill = (): JSX.Element => {
             </div>
 
             <h2>Github</h2>
-            <iframe
-                title="matcher9131/Slide"
-                src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131/initial-bill"
-                className="w-full max-w-screen-sm"
-            ></iframe>
+            <LinkCard href="https://github.com/matcher9131/initial-bill" />
 
             <h2>デプロイ例</h2>
-            <iframe
-                title="Initial Bill"
-                src="https://hatenablog-parts.com/embed?url=https://initial-bill-sample-x8jd7w09.web.app/"
-                className="w-full max-w-screen-sm"
-            ></iframe>
+            <LinkCard href="https://initial-bill-sample-x8jd7w09.web.app/" defaultTitle="初回請求書" />
             <p>
                 <strong>※メールアドレス「bill@example.com」、パスワード「initial」でログインしてください。</strong>
             </p>

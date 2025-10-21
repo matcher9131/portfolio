@@ -7,6 +7,7 @@ import TransitionLinkBefore from "./_codes/transitionLinkBefore";
 import TransitionLinkTypeDeclaration from "./_codes/transitionLinkTypeDeclaration";
 import CodeBlock from "@/app/_components/code/codeBlock";
 import CodeInline from "@/app/_components/code/codeInline";
+import LinkCard from "@/app/_components/linkCard/linkCard";
 
 const Portfolio = (): JSX.Element => {
     return (
@@ -15,11 +16,7 @@ const Portfolio = (): JSX.Element => {
             <p>{pageProperties.description}</p>
 
             <h2>GitHub</h2>
-            <iframe
-                title="matcher9131/Slide"
-                src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131/portfolio"
-                className="w-full max-w-screen-sm"
-            ></iframe>
+            <LinkCard href="https://github.com/matcher9131/portfolio" />
 
             <h2>動作推奨環境</h2>
             <ul>

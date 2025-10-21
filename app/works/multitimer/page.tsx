@@ -3,6 +3,7 @@ import NumericUpDown from "./_codes/numericUpdown";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
 import ExternalLink from "@/app/_components/externalLink";
+import LinkCard from "@/app/_components/linkCard/linkCard";
 import { siteTitle } from "@/app/_shared/const";
 import ImgWithBasePath from "@/app/_shared/imgWithBasePath";
 
@@ -23,11 +24,7 @@ const MultiTimer = (): JSX.Element => {
                 </div>
 
                 <h2>Github</h2>
-                <iframe
-                    title="matcher9131/MultiTimer"
-                    src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131/MultiTimer"
-                    className="w-full max-w-screen-sm"
-                ></iframe>
+                <LinkCard href="https://github.com/matcher9131/MultiTimer" />
 
                 <h2>機能</h2>
                 <p>以下の機能を持つタイマーを複数同時に走らせられる</p>
