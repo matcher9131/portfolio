@@ -2,6 +2,7 @@ import { type Metadata } from "next";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
 import ExternalLink from "@/app/_components/externalLink";
+import LinkCard from "@/app/_components/linkCard/linkCard";
 import { siteTitle } from "@/app/_shared/const";
 
 export const metadata: Metadata = {
@@ -15,11 +16,7 @@ const Virejo = (): JSX.Element => {
             <p>{pageProperties.description}</p>
 
             <h2>Github</h2>
-            <iframe
-                title="matcher9131/MultiTimer"
-                src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131/virejo"
-                className="w-full max-w-screen-sm"
-            ></iframe>
+            <LinkCard href="https://github.com/matcher9131/virejo" />
 
             <h2>機能</h2>
             <ul>

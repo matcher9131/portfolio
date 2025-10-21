@@ -2,6 +2,7 @@ import { type Metadata } from "next";
 import { pageProperties } from "./properties";
 import CodeInline from "@/app/_components/code/codeInline";
 import ExternalLink from "@/app/_components/externalLink";
+import LinkCard from "@/app/_components/linkCard/linkCard";
 import { siteTitle } from "@/app/_shared/const";
 import ImgWithBasePath from "@/app/_shared/imgWithBasePath";
 
@@ -29,18 +30,10 @@ const AtCoderDifficulty = (): JSX.Element => {
             </div>
 
             <h2>リンク</h2>
-            <iframe
-                title="AtCoder Difficulty"
-                src="https://hatenablog-parts.com/embed?url=https://matcher9131.github.io/atcoder-difficulty/"
-                className="w-full max-w-screen-sm"
-            ></iframe>
+            <LinkCard href="https://matcher9131.github.io/atcoder-difficulty/" />
 
             <h2>Github</h2>
-            <iframe
-                title="matcher9131/atcoder-difficulty"
-                src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131/atcoder-difficulty"
-                className="w-full max-w-screen-sm"
-            ></iframe>
+            <LinkCard href="https://github.com/matcher9131/atcoder-difficulty" />
 
             <h2>機能</h2>
             <ul>
