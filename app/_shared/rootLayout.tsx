@@ -1,5 +1,3 @@
-"use client";
-
 import "@/app/globals.css";
 import { notoSerif } from "./fonts";
 import PageTransitionAnimationBefore from "@/app/_components/pageTransition/pageTransitionAnimationBefore";
