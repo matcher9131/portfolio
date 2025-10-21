@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import LinkCard from "../_components/linkCard/linkCard";
 import { TransitionLink } from "../_components/pageTransition/transitionLink";
 import ImgWithBasePath from "../_shared/imgWithBasePath";
 import { getWorksPages } from "../_shared/pageProperties";
@@ -14,11 +15,7 @@ const Works = (): JSX.Element => {
         <article className="main-article">
             <h1>{pageProperties.name}</h1>
             <h2>GitHub</h2>
-            <iframe
-                title="matcher9131/MultiTimer"
-                src="https://hatenablog-parts.com/embed?url=https://github.com/matcher9131"
-                className="w-full max-w-screen-sm"
-            ></iframe>
+            <LinkCard href="https://github.com/matcher9131" />
 
             <h2>Lineup</h2>
             <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
